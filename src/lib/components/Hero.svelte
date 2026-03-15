@@ -15,7 +15,11 @@
           </span>
         </div>
       {/if}
-      <img src="/assets/logo_raw.jpg" alt="BettaHVAC Logo" class="hero-logo" />
+      <img
+        src="/assets/img/logo_raw.jpg"
+        alt="BettaHVAC Logo"
+        class="hero-logo"
+      />
       <h1 class="hero-title">{data.headline}</h1>
       <p class="hero-subtitle">{data.subheadline}</p>
       <div class="cta-group">
@@ -68,9 +72,13 @@
   }
 
   .hero-logo {
-    max-height: 80px;
+    width: 200px; /* Fixed width for consistency */
+    height: 200px; /* Fixed height for consistency */
+    object-fit: cover; /* Ensures the image fills the circle */
+    border-radius: 50%; /* Makes it circular */
     margin-bottom: 2rem;
-    border-radius: var(--radius-sm);
+    border: 4px solid var(--color-gold, #d4af37); /* Added a premium gold border */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
   }
 
   .hero-title {

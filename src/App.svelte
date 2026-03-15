@@ -16,9 +16,7 @@
 </script>
 
 <svelte:head>
-  <title
-    >{content.companyName} | Heating, Ventilation, and Air Conditioning</title
-  >
+  <title>{content.companyName} | Premium Heating & Cooling</title>
 </svelte:head>
 
 <main>
