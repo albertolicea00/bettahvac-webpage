@@ -3,109 +3,308 @@
   export let emergencyPhone = "";
 </script>
 
-<header class="hero">
-  <div class="overlay"></div>
-  <div class="container hero-content">
-    <div class="text-container glass-panel">
-      <!-- Emergency Badge -->
+<header class="hero-section">
+  <div class="background-overlay"></div>
+
+  <div class="hero-container container">
+    <!-- Top Branding -->
+    <div class="top-meta animate-slide-down">
       {#if emergencyPhone}
-        <div class="emergency-badge animate-float">
-          <span class="badge badge-emergency">
-            <i class="fa-solid fa-phone-volume"></i> 24/7 Emergency: {emergencyPhone}
-          </span>
+        <div class="emergency-pill">
+          <span class="dot"></span>
+          24/7 SUPPORT: {emergencyPhone}
         </div>
       {/if}
-      <img
-        src="/assets/img/logo_raw.jpg"
-        alt="BettaHVAC Logo"
-        class="hero-logo"
-      />
-      <h1 class="hero-title">{data.headline}</h1>
-      <p class="hero-subtitle">{data.subheadline}</p>
-      <div class="cta-group">
-        <a href="#contact" class="btn btn-primary">{data.ctaText}</a>
-        <a href="#services" class="btn btn-secondary">Our Services</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="hero-main">
+      <div class="logo-area animate-fade-in-up" style="animation-delay: 0.2s;">
+        <div class="logo-ring">
+          <img
+            src="/assets/img/logo_raw.jpg"
+            alt="BettaHVAC Logo"
+            class="brand-logo"
+          />
+        </div>
       </div>
+
+      <div class="text-area animate-fade-in-up" style="animation-delay: 0.4s;">
+        <h1 class="main-title">
+          <span class="title-top"
+            >{data.headline.split(" ").slice(0, 2).join(" ")}</span
+          >
+          <span class="title-btm gold-text"
+            >{data.headline.split(" ").slice(2).join(" ")}</span
+          >
+        </h1>
+        <p class="sub-title">{data.subheadline}</p>
+      </div>
+
+      <div
+        class="action-area animate-fade-in-up"
+        style="animation-delay: 0.6s;"
+      >
+        <div class="button-row">
+          <a href="#contact" class="btn-premium">
+            <span>{data.ctaText}</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          <a href="#services" class="btn-outline"> Our Expertise </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Explorer -->
+    <div class="scroll-explorer animate-fade-in" style="animation-delay: 1s;">
+      <div class="scroll-line"></div>
+      <span class="scroll-label">Scroll to Explore</span>
     </div>
   </div>
 </header>
 
 <style>
-  .hero {
+  .hero-section {
     position: relative;
-    min-height: 90vh;
+    height: 100vh;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url("https://images.unsplash.com/photo-1581094369796-7c91ad9bb6eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80")
-      center/cover no-repeat;
+    background: var(--hero-bg) center/cover no-repeat;
+    overflow: hidden;
+    color: white;
   }
 
-  .overlay {
+  .background-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      135deg,
-      rgba(15, 59, 140, 0.7),
-      rgba(193, 18, 31, 0.4)
-    );
+    /* opacity: 0.7; */
+    background: var(--hero-overlay);
+    backdrop-filter: blur(6px) grayscale(15%);
     z-index: 1;
   }
 
-  .hero-content {
+  .hero-container {
     position: relative;
     z-index: 2;
+    height: 100%;
     display: flex;
-    justify-content: center;
-    padding-top: 5rem;
-  }
-
-  .text-container {
-    max-width: 800px;
-    padding: 3rem;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 3rem 1.5rem;
     text-align: center;
-    animation: fadeInUp 1s ease forwards;
   }
 
-  .emergency-badge {
-    margin-bottom: 2rem;
-  }
-
-  .hero-logo {
-    width: 200px; /* Fixed width for consistency */
-    height: 200px; /* Fixed height for consistency */
-    object-fit: cover; /* Ensures the image fills the circle */
-    border-radius: 50%; /* Makes it circular */
-    margin-bottom: 2rem;
-    border: 4px solid var(--color-gold, #d4af37); /* Added a premium gold border */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
-  }
-
-  .hero-title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    color: var(--color-primary);
-    margin-bottom: 1rem;
-    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5); /* contrast against glass */
-  }
-
-  .hero-subtitle {
-    font-size: clamp(1.2rem, 2vw, 1.5rem);
-    color: var(--color-text);
-    margin-bottom: 2.5rem;
-    font-weight: 500;
-  }
-
-  .cta-group {
+  /* Top Meta */
+  .top-meta {
     display: flex;
-    gap: 1rem;
     justify-content: center;
-    flex-wrap: wrap;
   }
 
-  @keyframes fadeInUp {
+  .emergency-pill {
+    background: rgba(193, 18, 31, 0.2);
+    border: 1px solid rgba(193, 18, 31, 0.5);
+    padding: 0.5rem 1.25rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    backdrop-filter: blur(5px);
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    background: #c1121f;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #c1121f;
+    animation: pulse 1.5s infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+    100% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+  }
+
+  /* Main Area */
+  .hero-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .logo-ring {
+    width: 150px;
+    height: 150px;
+    padding: 10px;
+    border: 2px solid rgba(223, 177, 91, 0.3);
+    border-radius: 50%;
+    position: relative;
+  }
+
+  .brand-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+    border: 3px solid var(--color-accent);
+  }
+
+  .main-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    line-height: 0.95;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    margin-bottom: 1.5rem;
+  }
+
+  .title-top {
+    display: block;
+    color: white;
+  }
+
+  .gold-text {
+    display: block;
+    color: var(--color-accent);
+    text-shadow: 0 5px 15px rgba(223, 177, 91, 0.2);
+  }
+
+  .sub-title {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    max-width: 600px;
+    margin: 0 auto;
+    opacity: 0.8;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* Actions */
+  .button-row {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .btn-premium {
+    background: var(--color-accent);
+    color: #0f172a;
+    padding: 1.25rem 2.5rem;
+    border-radius: 8px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    box-shadow: 0 10px 25px rgba(223, 177, 91, 0.3);
+  }
+
+  .btn-premium:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(223, 177, 91, 0.4);
+    background: #fce7a1;
+  }
+
+  .btn-outline {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 1.2rem 2.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+  }
+
+  .btn-outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: white;
+  }
+
+  /* Scroll explorer */
+  .scroll-explorer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .scroll-line {
+    width: 2px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--color-accent), transparent);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scroll-line::after {
+    content: "";
+    position: absolute;
+    top: -60px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    animation: scroll-line-move 2s infinite;
+  }
+
+  @keyframes scroll-line-move {
+    0% {
+      top: -60px;
+    }
+    100% {
+      top: 60px;
+    }
+  }
+
+  .scroll-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    opacity: 0.5;
+  }
+
+  /* Animations */
+  .animate-slide-down {
+    animation: slideDown 0.8s ease-out forwards;
+  }
+
+  .animate-fade-in-up {
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+  }
+
+  @keyframes slideDown {
     from {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(-20px);
     }
     to {
       opacity: 1;
@@ -113,9 +312,39 @@
     }
   }
 
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+
   @media (max-width: 768px) {
-    .text-container {
-      padding: 2rem 1.5rem;
+    .main-title {
+      font-size: 3.5rem;
+    }
+    .button-row {
+      flex-direction: column;
+      width: 100%;
+    }
+    .btn-premium,
+    .btn-outline {
+      width: 100%;
+      justify-content: center;
+    }
+    .logo-ring {
+      width: 120px;
+      height: 120px;
     }
   }
 </style>

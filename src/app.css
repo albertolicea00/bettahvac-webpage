@@ -38,6 +38,10 @@
   /* Glassmorphism Defaults */
   --color-glass-bg: rgba(255, 255, 255, 0.85);
   --color-glass-border: rgba(255, 255, 255, 0.3);
+
+  /* Hero Defaults (Fallback) */
+  --hero-bg: url("/assets/img/hero_hot.avif");
+  --hero-overlay: linear-gradient(180deg, rgba(193, 18, 31, 0.85) 0%, rgba(193, 18, 31, 0.6) 100%);
 }
 
 :root[data-theme="hot"] {
@@ -59,6 +63,9 @@
   --shadow-premium:
     0 20px 25px -5px rgba(255, 30, 0, 0.3),
     0 8px 10px -6px rgba(255, 30, 0, 0.2);
+
+  --hero-bg: url("/assets/img/hero_hot.avif");
+  --hero-overlay: linear-gradient(180deg, rgba(193, 18, 31, 0.85) 0%, rgba(193, 18, 31, 0.6) 100%);
 }
 
 :root[data-theme="cool"] {
@@ -80,7 +87,13 @@
   --shadow-premium:
     0 20px 25px -5px rgba(14, 165, 233, 0.2),
     0 8px 10px -6px rgba(14, 165, 233, 0.1);
+
+  /* Hero Specifics */
+  --hero-bg: url("/assets/img/hero_cool.avif");
+  --hero-overlay: linear-gradient(180deg, rgba(15, 59, 140, 0.85) 0%, rgba(15, 59, 140, 0.6) 100%);
 }
+
+
 
 /* Base Styles */
 * {
