@@ -18,14 +18,6 @@ This repository hosts the **BettaHVAC** landing page—a high-performance, visua
 - ⭐ **Trusted Reviews**: Modular integration system for Google Reviews and internal feedback synchronization.
 - 📱 **Mobile First**: Fully responsive design that looks incredible on every device.
 
-## 🛠️ Tech Stack
-
-- **Kernel**: [Svelte 5](https://svelte.dev/) (Runes & Snippets)
-- **Bundler**: [Vite 7](https://vitejs.dev/)
-- **Style**: Custom CSS variables & CSS Modules
-- **Data**: JSON-driven architecture
-- **Animations**: Custom Svelte transitions & Background FX components
-
 ## 🛠️ Development & Contributing
 
 Contributions are welcome! For instructions on how to set up, run, and contribute to this project, please refer to the [CONTRIBUTING.md](./CONTRIBUTING.md) guide.
