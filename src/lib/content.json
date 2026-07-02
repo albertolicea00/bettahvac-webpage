@@ -63,8 +63,7 @@
   "location": "Lexington, Kentucky",
   "socialMedia": [
     { "platform": "facebook", "url": "https://facebook.com/bettahvac", "icon": "fa-brands fa-facebook-f" },
-    { "platform": "instagram", "url": "https://instagram.com/bettahvac", "icon": "fa-brands fa-instagram" },
-    { "platform": "twitter", "url": "https://twitter.com/bettahvac", "icon": "fa-brands fa-twitter" }
+    { "platform": "instagram", "url": "https://instagram.com/bettahvac", "icon": "fa-brands fa-instagram" }
   ],
   "offers": [
     {

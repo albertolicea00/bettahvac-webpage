@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   export let aboutData;
   export let contactData;
-  export let socialMedia = [];
+
 
   // Decode Base64 contact info strictly for real users
   let phoneStr = "";
@@ -50,22 +50,7 @@
         </li>
       </ul>
 
-      <!-- Social Media -->
-      {#if socialMedia && socialMedia.length > 0}
-        <div class="social-links">
-          {#each socialMedia as sm}
-            <a
-              href={sm.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="social-icon"
-              aria-label={sm.platform}
-            >
-              <i class={sm.icon}></i>
-            </a>
-          {/each}
-        </div>
-      {/if}
+
     </div>
 
     <!-- Contact Column -->
