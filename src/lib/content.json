@@ -29,7 +29,7 @@
   ],
   "reviewsData": {
     "averageRating": 4.8,
-    "totalReviews": 124,
+    "totalReviews": 4,
     "reviews": [
       {
         "id": "r1",
@@ -51,6 +51,13 @@
         "rating": 5,
         "text": "Great communication and transparent pricing. Will definitely use them again for our annual maintenance.",
         "date": "2026-01-05"
+      },
+      {
+        "id": "r4",
+        "author": "Mike Johnson",
+        "rating": 5,
+        "text": "Best HVAC service in town! They installed our new heating system quickly and at a fair price. Very satisfied.",
+        "date": "2026-03-15"
       }
     ]
   },
