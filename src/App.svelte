@@ -10,7 +10,6 @@
   import FAQ from "./lib/components/FAQ.svelte";
   import ThemeToggle from "./lib/components/ThemeToggle.svelte";
 
-  import BackgroundFX from "./lib/components/BackgroundFX.svelte";
   import FixedSocials from "./lib/components/FixedSocials.svelte";
 </script>
 
@@ -20,7 +19,6 @@
 
 <Navbar />
 <main>
-  <BackgroundFX />
   <ThemeToggle />
   <FixedSocials />
   <Hero />
