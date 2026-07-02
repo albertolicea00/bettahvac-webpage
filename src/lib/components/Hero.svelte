@@ -1,26 +1,20 @@
 <script>
-  const headline = "Comfort You Can Count On";
-  const subheadline = "Professional HVAC services for your home and business.";
+  const brand = "betta";
+  const brandHighlight = "HVAC";
+  const subheadline = "Professional Heating & Cooling Services in Lexington, KY and surrounding areas";
 </script>
 
 <header class="hero-section">
   <div class="background-overlay"></div>
 
   <div class="hero-container container">
-
     <!-- Main Content -->
     <div class="hero-main">
-
       <div class="text-area animate-fade-in-up" style="animation-delay: 0.4s;">
         <h1 class="main-title">
-          <span class="title-top"
-            >{headline.split(" ").slice(0, 2).join(" ")}</span
-          >
-          <span class="title-btm gold-text"
-            >{headline.split(" ").slice(2).join(" ")}</span
-          >
+          <span class="brand-white">{brand}</span><span class="brand-accent">{brandHighlight}</span>
         </h1>
-        <p class="sub-title">{subheadline}</p>
+        <h2 class="hero-subheadline">{subheadline}</h2>
       </div>
 
       <div
@@ -36,11 +30,11 @@
       </div>
     </div>
 
-    <!-- Scroll Explorer -->
-    <div class="scroll-explorer animate-fade-in" style="animation-delay: 1s;">
-      <div class="scroll-line"></div>
+    <!-- Scroll Explorer (fixed at bottom) -->
+    <a href="#reviews" class="scroll-explorer animate-fade-in" style="animation-delay: 1s;" aria-label="Scroll to explore content below">
       <span class="scroll-label">Scroll to Explore</span>
-    </div>
+      <div class="scroll-line"></div>
+    </a>
   </div>
 </header>
 
@@ -71,7 +65,8 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     padding: 3rem 1.5rem;
     text-align: center;
   }
@@ -95,25 +90,27 @@
     margin-bottom: 1.5rem;
   }
 
-  .title-top {
-    display: block;
+  .brand-white {
     color: white;
   }
 
-  .gold-text {
-    display: block;
+  .brand-accent {
     color: var(--color-accent);
     text-shadow: 0 5px 15px rgba(223, 177, 91, 0.2);
   }
 
-  .sub-title {
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
-    max-width: 600px;
-    margin: 0 auto;
-    color: white;
-    opacity: 0.9;
-    line-height: 1.6;
-    font-weight: 300;
+  .hero-subheadline {
+    font-family: var(--font-heading);
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 1.25rem;
+    margin-bottom: 0;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
   }
 
   /* Actions */
@@ -145,29 +142,28 @@
     background: #fce7a1;
   }
 
-  .btn-outline {
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 1.2rem 2.5rem;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-  }
-
-  .btn-outline:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: white;
-  }
-
-  /* Scroll explorer */
+  /* Scroll explorer — pinned to bottom */
   .scroll-explorer {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+    animation-delay: 1s;
+  }
+
+  .scroll-explorer:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+    border-radius: 4px;
   }
 
   .scroll-line {
@@ -203,32 +199,13 @@
     text-transform: uppercase;
     letter-spacing: 3px;
     opacity: 0.5;
+    color: white;
   }
 
   /* Animations */
-  .animate-slide-down {
-    animation: slideDown 0.8s ease-out forwards;
-  }
-
   .animate-fade-in-up {
     opacity: 0;
     animation: fadeInUp 1s ease-out forwards;
-  }
-
-  .animate-fade-in {
-    opacity: 0;
-    animation: fadeIn 1s ease-out forwards;
-  }
-
-  @keyframes slideDown {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 
   @keyframes fadeInUp {
@@ -252,12 +229,15 @@
     .main-title {
       font-size: 3.5rem;
     }
+    .hero-subheadline {
+      font-size: 1rem;
+      padding: 0 1rem;
+    }
     .button-row {
       flex-direction: column;
       width: 100%;
     }
-    .btn-premium,
-    .btn-outline {
+    .btn-premium {
       width: 100%;
       justify-content: center;
     }

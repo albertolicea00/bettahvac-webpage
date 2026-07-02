@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from "svelte";
+  let visibleCount = $state(0);
 
   const faqs = [
     {
@@ -20,9 +20,7 @@
     }
   ];
 
-  let visibleCount = 0;
-
-  onMount(() => {
+  $effect(() => {
     const interval = setInterval(() => {
       if (visibleCount < faqs.length * 2) {
         visibleCount++;
@@ -36,8 +34,8 @@
 
 <section id="faq" class="section chat-faq-section">
   <div class="container">
-    <div class="chat-header text-center">
-      <h2 class="section-title text-gradient">FAQ</h2>
+    <div class="chat-header">
+      <h2 class="section-title">Frequently Asked Questions</h2>
     </div>
 
     <div class="chat-window">
@@ -104,11 +102,6 @@
 </section>
 
 <style>
-  .mx-auto {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   .chat-faq-section {
     padding-bottom: 0;
   }
@@ -369,18 +362,6 @@
     background: var(--color-primary-light);
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(15, 59, 140, 0.35);
-  }
-
-  .cta-secondary {
-    background: var(--color-secondary);
-    color: white;
-    box-shadow: 0 4px 15px rgba(193, 18, 31, 0.25);
-  }
-
-  .cta-secondary:hover {
-    background: var(--color-secondary-light);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(193, 18, 31, 0.3);
   }
 
   @media (max-width: 768px) {

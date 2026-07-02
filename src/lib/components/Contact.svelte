@@ -26,67 +26,35 @@
 
 <section id="contact" class="section section-alt">
   <div class="container contact-wrapper">
-    <div class="contact-col glass-panel">
-      <h3 class="contact-title">Contact Us Now</h3>
-      <p class="contact-subtitle">Get your free quote today.</p>
-
-      <div class="info-group">
-        <div class="info-item">
-          <strong>Phone:</strong>
-          {#if phoneStr}
-            <a href="tel:{phoneStr}">{phoneStr}</a>
-          {:else}
-            <span>Loading...</span>
-          {/if}
-        </div>
-        <div class="info-item">
-          <strong>Email:</strong>
-          {#if emailStr}
-            <a href="mailto:{emailStr}">{emailStr}</a>
-          {:else}
-            <span>Loading...</span>
-          {/if}
-        </div>
+    <div class="map-col">
+      <img src="/assets/kentucky-map.png" alt="Kentucky state silhouette map showing bettaHVAC service area" class="map-img" width="600" height="400" loading="lazy" />
+      <div class="map-caption">
+        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+        <span>Serving Lexington, KY &amp; surrounding areas</span>
       </div>
-
-      <form class="contact-form" on:submit|preventDefault={handleContactSubmit}>
+    </div>
+    <div class="contact-col glass-panel">
+      <h2 class="contact-title">Contact Us Now</h2>
+      <p class="contact-phone">
+        <a href="tel:{phoneStr}" aria-label="Call bettaHVAC at {phoneStr}">{phoneStr}</a>
+      </p>
+      <p class="contact-subtitle">Get your free quote today. <a href="mailto:{emailStr}" class="email-inline">{emailStr}</a></p>
+      <p class="contact-questions">Still have questions? Our technicians are ready to provide technical support and personalized advice for your home or business.</p>
+      <form class="contact-form" onsubmit={(e) => { e.preventDefault(); handleContactSubmit(); }}>
         <div class="oh-no-bots" aria-hidden="true">
           <label for="address-field">Leave this empty</label>
-          <input
-            id="address-field"
-            type="text"
-            bind:value={honeypot}
-            autocomplete="off"
-            tabindex="-1"
-          />
+          <input id="address-field" type="text" bind:value={honeypot} autocomplete="off" tabindex="-1" />
         </div>
-
-        <input type="text" placeholder="Your Name" required />
-        <input type="email" placeholder="Your Email" required />
-        <textarea placeholder="How can we help?" rows="4" required></textarea>
-        <button type="submit" class="btn btn-secondary w-full"
-          >Send Message</button
-        >
+        <div class="field-group">
+          <label for="contact-name">Your Name</label>
+          <input id="contact-name" type="text" placeholder="John Doe" required />
+        </div>
+        <div class="field-group">
+          <label for="contact-message">How can we help?</label>
+          <textarea id="contact-message" placeholder="Describe your issue or request..." rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-secondary w-full">Send Message</button>
       </form>
-    </div>
-
-    <div class="map-col">
-      <div class="map-frame">
-        <iframe
-          title="BettaHVAC Location - Lexington, Kentucky"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d201065.87441399814!2d-84.62198949999999!3d38.0464066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x884244ef9aaaaaab%3A0x813583e76c11fba4!2sLexington%2C%20KY!5e0!3m2!1sen!2sus!4v1700000000000"
-          width="100%"
-          height="100%"
-          style="border:0;"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-        ></iframe>
-      </div>
-      <div class="map-caption">
-        <i class="fa-solid fa-location-dot"></i>
-        <span>Serving Lexington, KY & surrounding areas</span>
-      </div>
     </div>
   </div>
 </section>
@@ -116,21 +84,43 @@
     margin-bottom: 2rem;
   }
 
-  .info-group {
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
-
-  .info-item {
-    margin-bottom: 0.75rem;
-    font-size: 1.05rem;
-  }
-
-  .info-item strong {
+  .contact-phone {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: var(--font-heading);
     color: var(--color-primary);
-    display: inline-block;
-    width: 80px;
+    margin-bottom: 0.25rem;
+  }
+
+  .contact-phone a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .contact-phone a:hover {
+    color: var(--color-secondary);
+  }
+
+  .contact-questions {
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    border-left: 3px solid var(--color-accent);
+    padding-left: 1rem;
+  }
+
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .field-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text);
   }
 
   .contact-form {
@@ -175,19 +165,14 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    height: 100%;
   }
 
-  .map-frame {
+  .map-img {
     width: 100%;
-    height: 450px;
+    height: 100%;
+    object-fit: cover;
     border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-premium);
-    border: 3px solid var(--color-accent);
-  }
-
-  .map-frame iframe {
-    display: block;
   }
 
   .map-caption {
@@ -207,10 +192,6 @@
     .contact-wrapper {
       grid-template-columns: 1fr;
       gap: 2.5rem;
-    }
-
-    .map-frame {
-      height: 300px;
     }
   }
 </style>

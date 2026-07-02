@@ -1,13 +1,14 @@
 <script>
   import { onMount } from "svelte";
+  import ThemeToggle from "./ThemeToggle.svelte";
 
-  let scrolled = false;
-  let mobileOpen = false;
+  let scrolled = $state(false);
+  let mobileOpen = $state(false);
 
   const navLinks = [
-    { label: "Services", href: "#services" },
     { label: "Reviews", href: "#reviews" },
     { label: "About Us", href: "#about" },
+    { label: "Services", href: "#services" },
     { label: "FAQ", href: "#faq" },
     { label: "Contact", href: "#contact" },
   ];
@@ -16,8 +17,17 @@
     const handleScroll = () => {
       scrolled = window.scrollY > 50;
     };
+    const handleKeydown = (e) => {
+      if (e.key === "Escape" && mobileOpen) {
+        mobileOpen = false;
+      }
+    };
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("keydown", handleKeydown);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("keydown", handleKeydown);
+    };
   });
 
   const closeMobile = () => {
@@ -25,10 +35,14 @@
   };
 </script>
 
-<nav class="navbar" class:scrolled>
+<nav class="navbar" class:scrolled aria-label="Main">
   <div class="nav-inner">
-    <div class="nav-desktop">
-      <ul class="nav-links">
+    <!-- Left spacer for symmetry -->
+    <div class="nav-spacer"></div>
+
+    <!-- Center: Nav links -->
+    <div class="nav-center">
+      <ul class="nav-links" role="list">
         {#each navLinks as link}
           <li>
             <a href={link.href}>{link.label}</a>
@@ -37,33 +51,39 @@
       </ul>
     </div>
 
-    <div class="nav-mobile">
-      <button
-        class="hamburger"
-        class:open={mobileOpen}
-        on:click={() => (mobileOpen = !mobileOpen)}
-        aria-label="Toggle menu"
-      >
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
+    <!-- Right: Theme toggle + Mobile hamburger -->
+    <div class="nav-right">
+      <ThemeToggle />
 
-      {#if mobileOpen}
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <div class="mobile-overlay" on:click={closeMobile}></div>
-        <div class="mobile-dropdown">
-          <ul class="dropdown-links">
-            {#each navLinks as link}
-              <li>
-                <a href={link.href} on:click={closeMobile}>
-                  {link.label}
-                </a>
-              </li>
-            {/each}
-          </ul>
-        </div>
-      {/if}
+      <div class="nav-mobile">
+        <button
+          class="hamburger"
+          class:open={mobileOpen}
+          onclick={() => (mobileOpen = !mobileOpen)}
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-menu"
+        >
+          <span class="bar" aria-hidden="true"></span>
+          <span class="bar" aria-hidden="true"></span>
+          <span class="bar" aria-hidden="true"></span>
+        </button>
+
+        {#if mobileOpen}
+          <button type="button" class="mobile-overlay" onclick={closeMobile} aria-label="Close menu"></button>
+          <div class="mobile-dropdown" id="mobile-menu" role="dialog" aria-label="Navigation menu">
+            <ul class="dropdown-links" role="list">
+              {#each navLinks as link}
+                <li>
+                  <a href={link.href} onclick={closeMobile}>
+                    {link.label}
+                  </a>
+                </li>
+              {/each}
+            </ul>
+          </div>
+        {/if}
+      </div>
     </div>
   </div>
 </nav>
@@ -88,15 +108,25 @@
   .nav-inner {
     display: flex;
     align-items: center;
-    justify-content: center;
     width: 100%;
     max-width: 1200px;
   }
 
-  .nav-desktop {
+  .nav-spacer {
+    flex: 1;
+  }
+
+  .nav-center {
     display: flex;
     justify-content: center;
-    width: 100%;
+  }
+
+  .nav-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.75rem;
   }
 
   .nav-links {
@@ -135,11 +165,19 @@
     transition: all 0.3s ease;
     white-space: nowrap;
     font-family: var(--font-body);
+    min-height: 44px;
+    display: flex;
+    align-items: center;
   }
 
   .nav-links li a:hover {
     background: rgba(255, 255, 255, 0.12);
     color: white;
+  }
+
+  .nav-links li a:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 2px;
   }
 
   .nav-mobile {
@@ -169,6 +207,11 @@
     border-color: rgba(255, 255, 255, 0.2);
   }
 
+  .hamburger:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 3px;
+  }
+
   .bar {
     display: block;
     width: 20px;
@@ -195,12 +238,20 @@
     background: rgba(0, 0, 0, 0.3);
     z-index: 10000;
     animation: fadeIn 0.2s ease;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .mobile-overlay:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.8);
+    outline-offset: -4px;
   }
 
   .mobile-dropdown {
     position: absolute;
     top: calc(100% + 8px);
-    left: 0;
+    right: 0;
     min-width: 220px;
     background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.92));
     backdrop-filter: blur(24px) saturate(200%);
@@ -225,7 +276,8 @@
   }
 
   .dropdown-links li a {
-    display: block;
+    display: flex;
+    align-items: center;
     padding: 0.85rem 1.25rem;
     color: rgba(255, 255, 255, 0.85);
     font-size: 0.9rem;
@@ -236,11 +288,17 @@
     letter-spacing: 0.5px;
     text-transform: uppercase;
     white-space: nowrap;
+    min-height: 44px;
   }
 
   .dropdown-links li a:hover {
     background: rgba(255, 255, 255, 0.1);
     color: white;
+  }
+
+  .dropdown-links li a:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 2px;
   }
 
   @keyframes dropIn {
@@ -269,12 +327,21 @@
       justify-content: flex-start;
     }
 
-    .nav-desktop {
+    .nav-center {
       display: none;
+    }
+
+    .nav-right {
+      flex: 1;
+      justify-content: flex-end;
     }
 
     .nav-mobile {
       display: block;
+    }
+
+    .mobile-dropdown {
+      right: 0;
     }
   }
 </style>

@@ -68,7 +68,7 @@
           </div>
         {/if}
       </div>
-      <button class="btn btn-primary" on:click={() => (showForm = !showForm)}>
+      <button class="btn btn-primary" onclick={() => (showForm = !showForm)} aria-expanded={showForm}>
         {showForm ? "Cancel" : "Write a Review"}
       </button>
     </div>
@@ -77,7 +77,7 @@
     {#if showForm}
       <div class="review-form-container glass-panel">
         <h3>Rate your experience with bettaHVAC</h3>
-        <form on:submit|preventDefault={handleSubmit}>
+        <form onsubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
           <!-- Honeypot Field (Hidden from real users via CSS) -->
           <div class="oh-no-bots" aria-hidden="true">
             <label for="website-url">Website URL</label>
@@ -130,7 +130,7 @@
 
     <!-- Reviews Grid -->
     {#if loading}
-      <p style="text-align: center; color: var(--color-text-light);">
+      <p style="text-align: center; color: var(--color-text-light);" aria-live="polite" aria-busy="true">
         Loading reviews...
       </p>
     {:else}

@@ -1,16 +1,11 @@
 <script>
   import { onMount } from "svelte";
 
-  let theme = "hot"; // default
+  let theme = $state("hot");
 
   onMount(() => {
-    // Check local storage or default to 'hot'
     const savedTheme = localStorage.getItem("hvac-theme");
-    if (savedTheme) {
-      theme = savedTheme;
-    } else {
-      theme = "hot";
-    }
+    theme = savedTheme ?? "hot";
     document.documentElement.setAttribute("data-theme", theme);
   });
 
@@ -24,14 +19,15 @@
 <div class="theme-toggle-container">
   <button
     class="theme-toggle-btn {theme}"
-    on:click={toggleTheme}
-    aria-label="Toggle Theme"
+    onclick={toggleTheme}
+    aria-label={theme === "hot" ? "Switch to cool mode" : "Switch to hot mode"}
+    aria-pressed={theme === "cool"}
   >
     {#if theme === "hot"}
-      <i class="fa-solid fa-fire text-hot animate-pulse"></i>
+      <i class="fa-solid fa-fire text-hot animate-pulse" aria-hidden="true"></i>
       <span class="mode-text">Hot</span>
     {:else}
-      <i class="fa-solid fa-snowflake text-cool animate-float-slow"></i>
+      <i class="fa-solid fa-snowflake text-cool animate-float-slow" aria-hidden="true"></i>
       <span class="mode-text">Cool</span>
     {/if}
   </button>
@@ -39,43 +35,58 @@
 
 <style>
   .theme-toggle-container {
-    position: fixed;
-    top: 2rem;
-    right: 2rem;
+    position: relative;
+    display: flex;
+    align-items: center;
     z-index: 9999;
   }
 
   .theme-toggle-btn {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    background: var(--color-bg);
-    border: 2px solid var(--color-primary);
-    border-radius: 9999px;
-    padding: 0.75rem 1.5rem;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.6), rgba(30, 41, 59, 0.6));
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
     cursor: pointer;
-    box-shadow: var(--shadow-lg);
     font-family: var(--font-heading);
-    font-size: 1.1rem;
+    font-size: 0.85rem;
     font-weight: 700;
+    color: white;
     transition: all 0.3s ease;
+    white-space: nowrap;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    min-height: 44px;
+    min-width: 44px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
   .theme-toggle-btn:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-premium);
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.85));
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  }
+
+  .theme-toggle-btn:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 3px;
   }
 
   .mode-text {
-    color: var(--color-text);
+    color: white;
   }
 
   .text-hot {
-    color: #ef4444; /* Force red for flame */
+    color: #ff6b35;
   }
 
   .text-cool {
-    color: #0ea5e9; /* Force blue for flake */
+    color: #7dd3fc;
   }
 
   .animate-pulse {
@@ -87,24 +98,21 @@
   }
 
   @keyframes pulse {
-    0%,
-    100% {
-      transform: scale(1);
-      opacity: 1;
-    }
-    50% {
-      transform: scale(1.2);
-      opacity: 0.8;
-    }
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.8; }
   }
 
   @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0);
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+  }
+
+  @media (max-width: 768px) {
+    .theme-toggle-btn .mode-text {
+      display: none;
     }
-    50% {
-      transform: translateY(-3px);
+    .theme-toggle-btn {
+      padding: 0.5rem 0.75rem;
     }
   }
 </style>

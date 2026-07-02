@@ -1,25 +1,25 @@
 <script>
-  let imgFailed = false;
+  let imgFailed = $state(false);
 </script>
 
 <section id="about" class="section">
   <div class="container about-wrapper">
     <div class="about-col">
       <h2 class="section-title">About bettaHVAC</h2>
-      <div class="divider"></div>
+      <div class="divider" role="presentation"></div>
       <p class="about-desc">
-        With years of experience, bettaHVAC provides top-tier heating, ventilation, and air conditioning services. We are dedicated to delivering reliable, efficient, and cost-effective comfort solutions.
+        With years of experience, bettaHVAC provides top-tier heating, ventilation, and air conditioning services in Lexington, KY. We are dedicated to delivering reliable, efficient, and cost-effective comfort solutions for homes and businesses.
       </p>
 
-      <ul class="features">
+      <ul class="features" aria-label="Why choose bettaHVAC">
         <li>
-          <span class="check">✓</span> Licensed & Insured Professionals
+          <span class="check" aria-hidden="true">✓</span> Licensed &amp; Insured Professionals
         </li>
         <li>
-          <span class="check">✓</span> 24/7 Emergency Service
+          <span class="check" aria-hidden="true">✓</span> 24/7 Emergency Service
         </li>
         <li>
-          <span class="check">✓</span> 100% Satisfaction Guarantee
+          <span class="check" aria-hidden="true">✓</span> 100% Satisfaction Guarantee
         </li>
       </ul>
     </div>
@@ -29,18 +29,21 @@
         {#if !imgFailed}
           <img
             src="/assets/img/owner.jpg"
-            alt="BettaHVAC Owner"
+            alt="BettaHVAC team member — licensed HVAC professional"
             class="owner-photo"
-            on:error={() => (imgFailed = true)}
+            onerror={() => (imgFailed = true)}
+            width="400"
+            height="500"
+            loading="lazy"
           />
         {/if}
-        <div class="image-placeholder">
+        <div class="image-placeholder" aria-hidden="true">
           <i class="fa-solid fa-user-tie"></i>
           <span>Our Team</span>
         </div>
       </div>
       <div class="image-caption">
-        <span class="caption-name">BettaHVAC</span>
+        <span class="caption-name">bettaHVAC</span>
         <span class="caption-role">Proudly serving Lexington, KY</span>
       </div>
     </div>
@@ -78,6 +81,7 @@
   .features {
     list-style: none;
     padding: 0;
+    margin: 0;
   }
 
   .features li {
@@ -94,6 +98,12 @@
     color: var(--color-secondary);
     font-weight: bold;
     font-size: 1.2rem;
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .about-image-col {
