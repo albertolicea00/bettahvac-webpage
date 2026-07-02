@@ -3,71 +3,62 @@
 
   const brand = "betta";
   const brandHighlight = "HVAC";
-  const subheadlineLine2 = "in Lexington, KY and surrounding areas";
 
-  // Phrases that rotate via typing effect
-  const typingPhrases = [
-    "Professional Heating & Cooling Services",
-    "Heating, Ventilation, and Air Conditioning",
-    "24/7 Emergency HVAC Support",
-    "Trusted Local HVAC Experts"
-  ];
+  // Static prefix that anchors the typing line.
+  const staticPrefix = "Professional Services in ";
 
-  let typedText = $state("");
-  let phraseIndex = 0;
+  // Words that rotate via the typing effect.
+  const typingWords = ["Heating", "Ventilation", "Air Conditioning"];
+
+  let typedText = $state(staticPrefix);
+  let wordIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
   let pausedAtEnd = false;
 
   onMount(() => {
-    // Respect reduced-motion preference — show the first phrase statically
+    // Respect reduced-motion preference — show the first word statically
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
     if (reduceMotion) {
-      typedText = typingPhrases[0];
+      typedText = staticPrefix + typingWords[0];
       return;
     }
 
     const tick = () => {
-      const currentPhrase = typingPhrases[phraseIndex];
+      const currentWord = typingWords[wordIndex];
 
       if (pausedAtEnd) {
-        // After a full phrase, pause then start deleting
         isDeleting = true;
         pausedAtEnd = false;
+        // Schedule the next tick so the loop keeps going
+        setTimeout(tick, 30);
         return;
       }
 
       if (!isDeleting) {
-        // Typing forward
         charIndex++;
-        typedText = currentPhrase.slice(0, charIndex);
-        if (charIndex === currentPhrase.length) {
+        typedText = staticPrefix + currentWord.slice(0, charIndex);
+        if (charIndex === currentWord.length) {
           pausedAtEnd = true;
-          setTimeout(tick, 1800);
+          setTimeout(tick, 1200);
           return;
         }
       } else {
-        // Deleting
         charIndex--;
-        typedText = currentPhrase.slice(0, charIndex);
+        typedText = staticPrefix + currentWord.slice(0, charIndex);
         if (charIndex === 0) {
           isDeleting = false;
-          phraseIndex = (phraseIndex + 1) % typingPhrases.length;
+          wordIndex = (wordIndex + 1) % typingWords.length;
         }
       }
 
-      setTimeout(tick, isDeleting ? 35 : 75);
+      setTimeout(tick, isDeleting ? 30 : 60);
     };
 
-    setTimeout(tick, 75);
-
-    return () => {
-      // clearTimeout chain via cleanup isn't needed since each tick self-cancels
-      // by returning early; on unmount further setTimeout calls become harmless
-    };
+    setTimeout(tick, 60);
   });
 </script>
 
@@ -85,7 +76,7 @@
           <span class="sub-line typing-line">
             {typedText}<span class="typing-caret" aria-hidden="true">|</span>
           </span>
-          <span class="sub-line">{subheadlineLine2}</span>
+          <span class="sub-line">in Lexington, KY and surrounding areas</span>
         </h2>
       </div>
 
