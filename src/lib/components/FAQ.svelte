@@ -1,11 +1,28 @@
 <script>
   import { onMount } from "svelte";
-  export let faqs = [];
+
+  const faqs = [
+    {
+      question: "How often should I service my HVAC equipment?",
+      answer: "We recommend scheduling preventative maintenance at least twice a year: once in the spring for the air conditioning and once in the fall for the heating."
+    },
+    {
+      question: "Do you offer 24/7 emergency service?",
+      answer: "Yes, our team is available 24 hours a day, 7 days a week to handle any emergency in Lexington and surrounding areas."
+    },
+    {
+      question: "How long does it take to install a new air conditioning system?",
+      answer: "Generally, a standard installation takes one business day (8 to 10 hours). However, the time may vary depending on the complexity of the system and necessary modifications."
+    },
+    {
+      question: "What brands of equipment do you install?",
+      answer: "We work with the leading and best brands on the market, guaranteeing quality, energy efficiency, and durability in all our installations."
+    }
+  ];
 
   let visibleCount = 0;
 
   onMount(() => {
-    // Stagger reveal each Q&A pair
     const interval = setInterval(() => {
       if (visibleCount < faqs.length * 2) {
         visibleCount++;
@@ -26,7 +43,6 @@
     <div class="chat-window">
       <div class="chat-messages">
         {#each faqs as faq, i}
-          <!-- Customer question (left) -->
           <div
             class="chat-row customer-row {visibleCount > i * 2 ? 'visible' : ''}"
             style="animation-delay: {i * 0.6}s;"
@@ -42,7 +58,6 @@
             </div>
           </div>
 
-          <!-- BettaHVAC answer (right) -->
           <div
             class="chat-row team-row {visibleCount > i * 2 + 1 ? 'visible' : ''}"
             style="animation-delay: {i * 0.6 + 0.3}s;"
@@ -63,7 +78,6 @@
         {/each}
       </div>
 
-      <!-- Typing indicator -->
       <div class="typing-indicator">
         <div class="avatar team-avatar small">
           <i class="fa-solid fa-headset"></i>
@@ -75,7 +89,6 @@
     </div>
   </div>
 
-  <!-- Still have questions CTA -->
   <div class="cta-banner">
     <h3>Still have questions?</h3>
     <p>
@@ -104,7 +117,6 @@
     margin-bottom: 3rem;
   }
 
-  /* Chat Window */
   .chat-window {
     max-width: 720px;
     margin: 0 auto 3rem auto;
@@ -118,7 +130,6 @@
     gap: 1.5rem;
   }
 
-  /* Chat Row */
   .chat-row {
     display: flex;
     align-items: flex-start;
@@ -145,7 +156,6 @@
     padding-left: 3rem;
   }
 
-  /* Avatars */
   .avatar {
     width: 42px;
     height: 42px;
@@ -182,7 +192,6 @@
     font-size: 0.8rem;
   }
 
-  /* Bubble Wrap */
   .bubble-wrap {
     display: flex;
     flex-direction: column;
@@ -198,7 +207,6 @@
     align-items: flex-end;
   }
 
-  /* Bubbles */
   .bubble {
     padding: 1rem 1.25rem;
     border-radius: 18px;
@@ -229,7 +237,6 @@
     box-shadow: 0 4px 15px rgba(15, 59, 140, 0.25);
   }
 
-  /* Labels */
   .chat-label {
     font-size: 0.72rem;
     color: var(--color-text-light);
@@ -240,10 +247,9 @@
   }
 
   .team-label {
-    display: none; /* hidden since we have the badge */
+    display: none;
   }
 
-  /* Team Badge */
   .team-badge {
     display: inline-flex;
     align-items: center;
@@ -259,7 +265,6 @@
     font-size: 0.7rem;
   }
 
-  /* Typing indicator */
   .typing-indicator {
     display: flex;
     align-items: center;
@@ -309,7 +314,6 @@
     }
   }
 
-  /* CTA Banner */
   .cta-banner {
     background: var(--color-bg-alt);
     border-top: 1px solid rgba(0, 0, 0, 0.05);
@@ -379,7 +383,6 @@
     box-shadow: 0 8px 25px rgba(193, 18, 31, 0.3);
   }
 
-  /* Responsive */
   @media (max-width: 768px) {
     .chat-window {
       padding: 1rem 0;

@@ -1,14 +1,14 @@
 <script>
-  import content from "../content.json";
   export let offers = [];
 
+  const contactEmail = "fake@bettahvac.com";
+
   const claimOffer = (offer) => {
-    const email = content.contact.email;
     const subject = encodeURIComponent(`Claiming Offer: ${offer.title}`);
     const body = encodeURIComponent(
       `Hello BettaHVAC,\n\nI would like to claim the following offer:\n\nTitle: ${offer.title}\nDescription: ${offer.description}\nCode: ${offer.code}\n\nPlease let me know how to proceed.\n\nThank you.`,
     );
-    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
   };
 </script>
 
@@ -108,7 +108,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: -4.5rem auto 1.5rem auto; /* Overlap effect */
+    margin: -4.5rem auto 1.5rem auto;
     border: 5px solid var(--color-bg);
     box-shadow: var(--shadow-md);
   }

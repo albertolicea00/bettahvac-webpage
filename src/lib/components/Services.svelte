@@ -1,5 +1,21 @@
 <script>
-  export let data;
+  const services = [
+    {
+      id: "ac-repair",
+      title: "A/C Repair",
+      description: "Fast and reliable air conditioning repair services to keep you cool."
+    },
+    {
+      id: "heating-installation",
+      title: "Heating Installation",
+      description: "Expert installation of energy-efficient heating systems."
+    },
+    {
+      id: "maintenance",
+      title: "Preventative Maintenance",
+      description: "Regular maintenance to extend the life of your equipment and save on energy costs."
+    }
+  ];
 </script>
 
 <section id="services" class="section section-alt">
@@ -10,7 +26,7 @@
     </p>
 
     <div class="services-grid">
-      {#each data as service, i}
+      {#each services as service, i}
         <div class="service-card" style="animation-delay: {i * 0.15}s">
           <div class="card-icon">
             <svg

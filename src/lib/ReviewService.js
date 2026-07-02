@@ -1,14 +1,38 @@
-/**
- * ReviewService.js
- *
- * Modular service interacting with reviews.
- * Can be easily swapped with Google Reviews API or another backend.
- */
+const localReviewsData = {
+  averageRating: 4.8,
+  totalReviews: 4,
+  reviews: [
+    {
+      id: "r1",
+      author: "Jane Doe",
+      rating: 5,
+      text: "Excellent service! The technicians were prompt, professional, and had our A/C running perfectly in no time.",
+      date: "2025-05-12"
+    },
+    {
+      id: "r2",
+      author: "John Smith",
+      rating: 4,
+      text: "Very knowledgeable team. They fixed our heating issue efficiently. Highly recommend bettaHVAC.",
+      date: "2025-11-20"
+    },
+    {
+      id: "r3",
+      author: "Sarah Connor",
+      rating: 5,
+      text: "Great communication and transparent pricing. Will definitely use them again for our annual maintenance.",
+      date: "2026-01-05"
+    },
+    {
+      id: "r4",
+      author: "Mike Johnson",
+      rating: 5,
+      text: "Best HVAC service in town! They installed our new heating system quickly and at a fair price. Very satisfied.",
+      date: "2026-03-15"
+    }
+  ]
+};
 
-// Start with local default data fallback
-import content from "./content.json";
-
-// In a real scenario, this could be an API URL.
 const API_ENDPOINT = null;
 
 export const fetchReviews = async () => {
@@ -24,10 +48,9 @@ export const fetchReviews = async () => {
     }
   }
 
-  // Simulated network delay
   await new Promise((resolve) => setTimeout(resolve, 500));
 
-  return content.reviewsData;
+  return localReviewsData;
 };
 
 export const postReview = async (review) => {
@@ -44,10 +67,8 @@ export const postReview = async (review) => {
     }
   }
 
-  // Simulated network delay
   await new Promise((resolve) => setTimeout(resolve, 600));
 
-  // Return a mocked success response
   return {
     success: true,
     review: {

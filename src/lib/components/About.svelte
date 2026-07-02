@@ -1,17 +1,16 @@
 <script>
-  export let aboutData;
   let imgFailed = false;
 </script>
 
 <section id="about" class="section">
   <div class="container about-wrapper">
-    <!-- About Text Column -->
     <div class="about-col">
-      <h2 class="section-title">{aboutData.title}</h2>
+      <h2 class="section-title">About bettaHVAC</h2>
       <div class="divider"></div>
-      <p class="about-desc">{aboutData.description}</p>
+      <p class="about-desc">
+        With years of experience, bettaHVAC provides top-tier heating, ventilation, and air conditioning services. We are dedicated to delivering reliable, efficient, and cost-effective comfort solutions.
+      </p>
 
-      <!-- Feature list -->
       <ul class="features">
         <li>
           <span class="check">✓</span> Licensed & Insured Professionals
@@ -25,7 +24,6 @@
       </ul>
     </div>
 
-    <!-- Owner Photo Column -->
     <div class="about-image-col">
       <div class="image-frame" class:placeholder-active={imgFailed}>
         {#if !imgFailed}
@@ -98,7 +96,6 @@
     font-size: 1.2rem;
   }
 
-  /* Image Column */
   .about-image-col {
     display: flex;
     flex-direction: column;

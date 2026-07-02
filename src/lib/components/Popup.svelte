@@ -1,11 +1,11 @@
 <script>
   import { onMount } from "svelte";
-  import content from "../content.json";
+
+  const contactEmail = "fake@bettahvac.com";
 
   let show = false;
 
   onMount(() => {
-    // Show popup after 3 seconds
     const timer = setTimeout(() => {
       show = true;
     }, 3000);
@@ -18,12 +18,11 @@
   };
 
   const claimOffer = () => {
-    const email = content.contact.email;
     const subject = encodeURIComponent(`Claiming Special Popup Offer`);
     const body = encodeURIComponent(
       `Hello BettaHVAC,\n\nI would like to claim the special offer from the popup (Free inspection / 30% OFF 3rd job).\n\nPlease let me know how to proceed.\n\nThank you.`,
     );
-    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
     closePopup();
   };
 </script>
@@ -38,8 +37,6 @@
           <i class="fa-solid fa-gift pulse-icon"></i>
         </div>
         <h2 class="popup-title text-gradient">Special Offers!</h2>
-
-        
 
         <button class="btn btn-secondary w-full claim-btn" on:click={claimOffer}
           >Claim Now</button
@@ -105,8 +102,6 @@
     font-size: 2rem;
     margin-bottom: 1.5rem;
   }
-
-  
 
   .w-full {
     width: 100%;

@@ -1,18 +1,18 @@
 <script>
   import { onMount } from "svelte";
-  export let contactData;
 
-  // Decode contact info for real users
+  const rawPhone = "(555) 123-4567";
+  const rawEmail = "fake@bettahvac.com";
+
   let phoneStr = "";
   let emailStr = "";
 
-  // Form State
   let honeypot = "";
 
   onMount(() => {
     const reverseString = (str) => str.split("").reverse().join("");
-    phoneStr = reverseString(contactData.phone.split("").reverse().join(""));
-    emailStr = reverseString(contactData.email.split("").reverse().join(""));
+    phoneStr = reverseString(rawPhone.split("").reverse().join(""));
+    emailStr = reverseString(rawEmail.split("").reverse().join(""));
   });
 
   const handleContactSubmit = () => {
@@ -26,7 +26,6 @@
 
 <section id="contact" class="section section-alt">
   <div class="container contact-wrapper">
-    <!-- Contact Form Column -->
     <div class="contact-col glass-panel">
       <h3 class="contact-title">Contact Us Now</h3>
       <p class="contact-subtitle">Get your free quote today.</p>
@@ -51,7 +50,6 @@
       </div>
 
       <form class="contact-form" on:submit|preventDefault={handleContactSubmit}>
-        <!-- Honeypot -->
         <div class="oh-no-bots" aria-hidden="true">
           <label for="address-field">Leave this empty</label>
           <input
@@ -72,7 +70,6 @@
       </form>
     </div>
 
-    <!-- Map Column -->
     <div class="map-col">
       <div class="map-frame">
         <iframe
@@ -160,7 +157,6 @@
     box-shadow: 0 0 0 3px rgba(15, 59, 140, 0.1);
   }
 
-  /* Honeypot hidden visually */
   .oh-no-bots {
     opacity: 0;
     position: absolute;
@@ -175,7 +171,6 @@
     width: 100%;
   }
 
-  /* Map Column */
   .map-col {
     display: flex;
     flex-direction: column;

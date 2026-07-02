@@ -1,6 +1,6 @@
 <script>
-  export let data;
-  export let emergencyPhone = "";
+  const headline = "Comfort You Can Count On";
+  const subheadline = "Professional HVAC services for your home and business.";
 </script>
 
 <header class="hero-section">
@@ -8,21 +8,19 @@
 
   <div class="hero-container container">
 
-
     <!-- Main Content -->
     <div class="hero-main">
-      
 
       <div class="text-area animate-fade-in-up" style="animation-delay: 0.4s;">
         <h1 class="main-title">
           <span class="title-top"
-            >{data.headline.split(" ").slice(0, 2).join(" ")}</span
+            >{headline.split(" ").slice(0, 2).join(" ")}</span
           >
           <span class="title-btm gold-text"
-            >{data.headline.split(" ").slice(2).join(" ")}</span
+            >{headline.split(" ").slice(2).join(" ")}</span
           >
         </h1>
-        <p class="sub-title">{data.subheadline}</p>
+        <p class="sub-title">{subheadline}</p>
       </div>
 
       <div
@@ -62,7 +60,6 @@
   .background-overlay {
     position: absolute;
     inset: 0;
-    /* opacity: 0.7; */
     background: var(--hero-overlay);
     backdrop-filter: blur(6px) grayscale(15%);
     z-index: 1;
@@ -79,8 +76,6 @@
     text-align: center;
   }
 
-
-
   /* Main Area */
   .hero-main {
     display: flex;
@@ -90,10 +85,6 @@
     max-width: 1000px;
     margin: 0 auto;
   }
-
-  
-
-  
 
   .main-title {
     font-size: clamp(3rem, 8vw, 6rem);

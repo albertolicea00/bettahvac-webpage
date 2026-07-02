@@ -1,8 +1,10 @@
 <script>
-  export let socialMedia = [];
+  const socials = [
+    { platform: "facebook", url: "https://facebook.com/bettahvac", icon: "fa-brands fa-facebook-f" },
+    { platform: "instagram", url: "https://instagram.com/bettahvac", icon: "fa-brands fa-instagram" }
+  ];
 
-  // Filter for only Facebook and Instagram
-  $: fixedSocials = socialMedia.filter(
+  $: fixedSocials = socials.filter(
     (sm) =>
       sm.platform.toLowerCase() === "facebook" ||
       sm.platform.toLowerCase() === "instagram",
@@ -48,7 +50,6 @@
     border-right: none;
   }
 
-  /* Specific brand colors on hover for a wow effect */
   .social-side-btn.facebook:hover {
     background: #1877f2;
     color: white;
