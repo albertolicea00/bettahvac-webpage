@@ -39,17 +39,7 @@
         </div>
         <h2 class="popup-title text-gradient">Special Offers!</h2>
 
-        <ul class="offers-list">
-          <li>
-            <i class="fa-solid fa-check text-secondary"></i>
-            <strong>New customers</strong> get a <span>FREE inspection</span>!
-          </li>
-          <li>
-            <i class="fa-solid fa-check text-secondary"></i>
-            Your <strong>3rd job</strong> gets <span>30% OFF</span> when using our
-            card!
-          </li>
-        </ul>
+        
 
         <button class="btn btn-secondary w-full claim-btn" on:click={claimOffer}
           >Claim Now</button
@@ -116,30 +106,7 @@
     margin-bottom: 1.5rem;
   }
 
-  .offers-list {
-    list-style: none;
-    text-align: left;
-    margin-bottom: 2rem;
-  }
-
-  .offers-list li {
-    font-size: 1.1rem;
-    color: var(--color-text);
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    line-height: 1.4;
-  }
-
-  .offers-list li i {
-    margin-top: 0.25rem;
-  }
-
-  .offers-list li span {
-    color: var(--color-primary);
-    font-weight: 700;
-  }
+  
 
   .w-full {
     width: 100%;

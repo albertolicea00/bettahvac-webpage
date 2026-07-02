@@ -19,15 +19,7 @@
 
     <!-- Main Content -->
     <div class="hero-main">
-      <div class="logo-area animate-fade-in-up" style="animation-delay: 0.2s;">
-        <div class="logo-ring">
-          <img
-            src="/assets/img/logo_raw.jpg"
-            alt="BettaHVAC Logo"
-            class="brand-logo"
-          />
-        </div>
-      </div>
+      
 
       <div class="text-area animate-fade-in-up" style="animation-delay: 0.4s;">
         <h1 class="main-title">
@@ -150,23 +142,9 @@
     margin: 0 auto;
   }
 
-  .logo-ring {
-    width: 150px;
-    height: 150px;
-    padding: 10px;
-    border: 2px solid rgba(223, 177, 91, 0.3);
-    border-radius: 50%;
-    position: relative;
-  }
+  
 
-  .brand-logo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
-    border: 3px solid var(--color-accent);
-  }
+  
 
   .main-title {
     font-size: clamp(3rem, 8vw, 6rem);
@@ -341,10 +319,6 @@
     .btn-outline {
       width: 100%;
       justify-content: center;
-    }
-    .logo-ring {
-      width: 120px;
-      height: 120px;
     }
   }
 </style>
