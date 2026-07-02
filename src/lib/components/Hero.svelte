@@ -1,7 +1,74 @@
 <script>
+  import { onMount } from "svelte";
+
   const brand = "betta";
   const brandHighlight = "HVAC";
-  const subheadline = "Professional Heating & Cooling Services in Lexington, KY and surrounding areas";
+  const subheadlineLine2 = "in Lexington, KY and surrounding areas";
+
+  // Phrases that rotate via typing effect
+  const typingPhrases = [
+    "Professional Heating & Cooling Services",
+    "Heating, Ventilation, and Air Conditioning",
+    "24/7 Emergency HVAC Support",
+    "Trusted Local HVAC Experts"
+  ];
+
+  let typedText = $state("");
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let pausedAtEnd = false;
+
+  onMount(() => {
+    // Respect reduced-motion preference — show the first phrase statically
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (reduceMotion) {
+      typedText = typingPhrases[0];
+      return;
+    }
+
+    const tick = () => {
+      const currentPhrase = typingPhrases[phraseIndex];
+
+      if (pausedAtEnd) {
+        // After a full phrase, pause then start deleting
+        isDeleting = true;
+        pausedAtEnd = false;
+        return;
+      }
+
+      if (!isDeleting) {
+        // Typing forward
+        charIndex++;
+        typedText = currentPhrase.slice(0, charIndex);
+        if (charIndex === currentPhrase.length) {
+          pausedAtEnd = true;
+          setTimeout(tick, 1800);
+          return;
+        }
+      } else {
+        // Deleting
+        charIndex--;
+        typedText = currentPhrase.slice(0, charIndex);
+        if (charIndex === 0) {
+          isDeleting = false;
+          phraseIndex = (phraseIndex + 1) % typingPhrases.length;
+        }
+      }
+
+      setTimeout(tick, isDeleting ? 35 : 75);
+    };
+
+    setTimeout(tick, 75);
+
+    return () => {
+      // clearTimeout chain via cleanup isn't needed since each tick self-cancels
+      // by returning early; on unmount further setTimeout calls become harmless
+    };
+  });
 </script>
 
 <header class="hero-section">
@@ -14,7 +81,12 @@
         <h1 class="main-title">
           <span class="brand-white">{brand}</span><span class="brand-accent">{brandHighlight}</span>
         </h1>
-        <h2 class="hero-subheadline">{subheadline}</h2>
+        <h2 class="hero-subheadline">
+          <span class="sub-line typing-line">
+            {typedText}<span class="typing-caret" aria-hidden="true">|</span>
+          </span>
+          <span class="sub-line">{subheadlineLine2}</span>
+        </h2>
       </div>
 
       <div
@@ -111,6 +183,34 @@
     margin-right: auto;
     line-height: 1.5;
     letter-spacing: 0.5px;
+  }
+
+  .sub-line {
+    display: block;
+  }
+
+  .typing-line {
+    min-height: 1.5em;
+  }
+
+  .typing-caret {
+    display: inline-block;
+    margin-left: 2px;
+    color: var(--color-accent);
+    font-weight: 700;
+    animation: caretBlink 0.9s steps(2, start) infinite;
+  }
+
+  @keyframes caretBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .typing-caret {
+      animation: none;
+      opacity: 0;
+    }
   }
 
   /* Actions */
