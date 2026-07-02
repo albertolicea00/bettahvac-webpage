@@ -7,15 +7,7 @@
   <div class="background-overlay"></div>
 
   <div class="hero-container container">
-    <!-- Top Branding -->
-    <div class="top-meta animate-slide-down">
-      {#if emergencyPhone}
-        <div class="emergency-pill">
-          <span class="dot"></span>
-          24/7 SUPPORT: {emergencyPhone}
-        </div>
-      {/if}
-    </div>
+
 
     <!-- Main Content -->
     <div class="hero-main">
@@ -39,10 +31,9 @@
       >
         <div class="button-row">
           <a href="#contact" class="btn-premium">
-            <span>{data.ctaText}</span>
+            <span>Contact Us</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
-          <a href="#services" class="btn-outline"> Our Expertise </a>
         </div>
       </div>
     </div>
@@ -88,49 +79,7 @@
     text-align: center;
   }
 
-  /* Top Meta */
-  .top-meta {
-    display: flex;
-    justify-content: center;
-  }
 
-  .emergency-pill {
-    background: rgba(193, 18, 31, 0.2);
-    border: 1px solid rgba(193, 18, 31, 0.5);
-    padding: 0.5rem 1.25rem;
-    border-radius: 50px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    backdrop-filter: blur(5px);
-  }
-
-  .dot {
-    width: 8px;
-    height: 8px;
-    background: #c1121f;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #c1121f;
-    animation: pulse 1.5s infinite;
-  }
-
-  @keyframes pulse {
-    0% {
-      opacity: 0.5;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 1;
-      transform: scale(1.2);
-    }
-    100% {
-      opacity: 0.5;
-      transform: scale(1);
-    }
-  }
 
   /* Main Area */
   .hero-main {
@@ -170,7 +119,8 @@
     font-size: clamp(1.1rem, 2vw, 1.4rem);
     max-width: 600px;
     margin: 0 auto;
-    opacity: 0.8;
+    color: white;
+    opacity: 0.9;
     line-height: 1.6;
     font-weight: 300;
   }
