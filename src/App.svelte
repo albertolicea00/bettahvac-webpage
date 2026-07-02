@@ -3,10 +3,11 @@
   import content from "./lib/content.json";
 
   // Import Sections
+  import Navbar from "./lib/components/Navbar.svelte";
   import Hero from "./lib/components/Hero.svelte";
   import Services from "./lib/components/Services.svelte";
-  
-  import AboutContact from "./lib/components/AboutContact.svelte";
+  import About from "./lib/components/About.svelte";
+  import Contact from "./lib/components/Contact.svelte";
   import Reviews from "./lib/components/Reviews.svelte";
   import FAQ from "./lib/components/FAQ.svelte";
   import ThemeToggle from "./lib/components/ThemeToggle.svelte";
@@ -19,6 +20,7 @@
   <title>{content.companyName} | Premium Heating & Cooling</title>
 </svelte:head>
 
+<Navbar />
 <main>
   <BackgroundFX />
   <ThemeToggle />
@@ -27,12 +29,9 @@
   <Services data={content.services} />
 
   <Reviews />
+  <About aboutData={content.about} />
   <FAQ faqs={content.faqs} />
-  <AboutContact
-    aboutData={content.about}
-    contactData={content.contact}
-    socialMedia={content.socialMedia}
-  />
+  <Contact contactData={content.contact} />
 </main>
 
 <style>
