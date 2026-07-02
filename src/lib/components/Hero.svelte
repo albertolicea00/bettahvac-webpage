@@ -145,7 +145,7 @@
   }
 
   .main-title {
-    font-size: clamp(3rem, 8vw, 6rem);
+    font-size: clamp(3.5rem, 10vw, 8rem);
     line-height: 0.95;
     font-weight: 800;
     text-transform: uppercase;
@@ -164,16 +164,24 @@
 
   .hero-subheadline {
     font-family: var(--font-heading);
-    font-size: clamp(1rem, 2vw, 1.4rem);
+    font-size: clamp(1.2rem, 2.6vw, 2rem);
     font-weight: 500;
     color: rgba(255, 255, 255, 0.9);
     margin-top: 1.25rem;
     margin-bottom: 0;
-    max-width: 720px;
+    max-width: 820px;
     margin-left: auto;
     margin-right: auto;
     line-height: 1.5;
     letter-spacing: 0.5px;
+  }
+
+  .hero-subheadline .sub-line:nth-child(2) {
+    font-size: clamp(0.85rem, 1.6vw, 1.2rem);
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.75);
+    margin-top: 0.6rem;
+    letter-spacing: 0.8px;
   }
 
   .sub-line {
@@ -318,11 +326,14 @@
 
   @media (max-width: 768px) {
     .main-title {
-      font-size: 3.5rem;
+      font-size: 4.5rem;
     }
     .hero-subheadline {
-      font-size: 1rem;
+      font-size: 1.2rem;
       padding: 0 1rem;
+    }
+    .hero-subheadline .sub-line:nth-child(2) {
+      font-size: 0.9rem;
     }
     .button-row {
       flex-direction: column;

@@ -65,7 +65,7 @@
     0 8px 10px -6px rgba(255, 30, 0, 0.2);
 
   --hero-bg: url("/assets/img/hero_hot.avif");
-  --hero-overlay: linear-gradient(180deg, rgba(193, 18, 31, 0.85) 0%, rgba(193, 18, 31, 0.6) 100%);
+  --hero-overlay: linear-gradient(180deg, rgba(193, 18, 31, 0.4) 0%, rgba(193, 18, 31, 0.2) 100%);
 }
 
 :root[data-theme="cool"] {
