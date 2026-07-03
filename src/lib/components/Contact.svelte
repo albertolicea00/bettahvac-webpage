@@ -13,6 +13,14 @@
       <a href="tel:1-800-911-HVAC" class="cta-btn cta-primary">
         <i class="fa-solid fa-phone"></i> Call Us Now
       </a>
+      <a
+        href="https://wa.me/15551234567"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="cta-btn cta-whatsapp"
+      >
+        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+      </a>
       <a href="mailto:fake@bettahvac.com" class="cta-btn cta-secondary">
         <i class="fa-solid fa-envelope"></i> Email Us
       </a>
@@ -75,6 +83,22 @@
   .cta-primary:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
+  }
+
+  .cta-whatsapp {
+    background: #25d366;
+    color: white;
+    box-shadow: var(--shadow-md);
+  }
+
+  .cta-whatsapp:hover {
+    background: #1eb857;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .cta-whatsapp i {
+    font-size: 1.25rem;
   }
 
   .cta-secondary {
