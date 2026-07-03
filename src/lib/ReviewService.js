@@ -1,3 +1,20 @@
+/**
+ * @typedef {Object} Review
+ * @property {string} id
+ * @property {string} author
+ * @property {number} rating
+ * @property {string} text
+ * @property {string} date
+ */
+
+/**
+ * @typedef {Object} ReviewsData
+ * @property {number} averageRating
+ * @property {number} totalReviews
+ * @property {Review[]} reviews
+ */
+
+/** @type {ReviewsData} */
 const localReviewsData = {
   averageRating: 4.8,
   totalReviews: 4,
@@ -35,6 +52,7 @@ const localReviewsData = {
 
 const API_ENDPOINT = null;
 
+/** @returns {Promise<ReviewsData>} */
 export const fetchReviews = async () => {
   if (API_ENDPOINT) {
     try {
@@ -53,6 +71,10 @@ export const fetchReviews = async () => {
   return localReviewsData;
 };
 
+/**
+ * @param {{ author: string, rating: number, text: string }} review
+ * @returns {Promise<{ success: boolean, review: Review }>}
+ */
 export const postReview = async (review) => {
   if (API_ENDPOINT) {
     try {

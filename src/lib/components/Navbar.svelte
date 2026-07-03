@@ -17,6 +17,7 @@
     const handleScroll = () => {
       scrolled = window.scrollY > 50;
     };
+    /** @param {KeyboardEvent} e */
     const handleKeydown = (e) => {
       if (e.key === "Escape" && mobileOpen) {
         mobileOpen = false;

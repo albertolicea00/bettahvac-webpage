@@ -21,6 +21,7 @@
     }
   ];
 
+  /** @type {HTMLElement | undefined} */
   let chatWindowElement;
   let typedQuestions = $state(faqs.map(() => ""));
   let typedAnswers = $state(faqs.map(() => ""));
@@ -30,11 +31,21 @@
   let typingStarted = false;
   let cancelled = false;
 
+  /** @param {number} duration */
   const wait = (duration) =>
     new Promise((resolve) => {
       window.setTimeout(resolve, duration);
     });
 
+  /**
+   * @param {string[]} target
+   * @param {boolean[]} visibility
+   * @param {number} index
+   * @param {string} text
+   * @param {string} role
+   * @param {number} speed
+   * @param {number} [startDelay]
+   */
   async function typeLine(
     target,
     visibility,

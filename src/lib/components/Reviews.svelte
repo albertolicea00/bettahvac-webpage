@@ -3,6 +3,7 @@
   import { fetchReviews, postReview } from "../ReviewService.js";
   import { reveal } from "../actions/reveal.js";
 
+  /** @type {import("../ReviewService.js").ReviewsData} */
   let reviewsData = { averageRating: 0, totalReviews: 0, reviews: [] };
   let loading = true;
 

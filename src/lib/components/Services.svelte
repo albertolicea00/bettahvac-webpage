@@ -39,7 +39,10 @@
     return () => obs.disconnect();
   });
 
-  const spriteSrc = $derived((name) => `/assets/generated/sprite-${name}-${theme}.webp`);
+  const spriteSrc = $derived(
+    (/** @type {string} */ name) =>
+      `/assets/generated/sprite-${name}-${theme}.webp`
+  );
 
   // Per-sprite 3D tilt — same effect as the Kentucky map:
   // the cursor position drives rotateX/rotateY on the sprite only,
@@ -47,6 +50,10 @@
   const MAX_TILT = 10; // degrees
   let tilts = $state(services.map(() => ({ x: 0, y: 0, active: false })));
 
+  /**
+   * @param {number} i
+   * @param {PointerEvent & { currentTarget: HTMLElement }} event
+   */
   function handleMove(i, event) {
     const rect = event.currentTarget.getBoundingClientRect();
     const x = (event.clientX - rect.left) / rect.width - 0.5;
@@ -56,6 +63,7 @@
     tilts[i].active = true;
   }
 
+  /** @param {number} i */
   function resetTilt(i) {
     tilts[i].x = 0;
     tilts[i].y = 0;

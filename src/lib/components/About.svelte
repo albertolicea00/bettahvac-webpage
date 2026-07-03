@@ -14,6 +14,7 @@
     "100% Satisfaction Guarantee"
   ];
 
+  /** @type {HTMLElement | undefined} */
   let aboutColElement;
   let typedItems = $state(trustItems.map(() => ""));
   let visibleLines = $state(0);
@@ -21,6 +22,7 @@
   let typingStarted = false;
   let stopTyping = () => {};
 
+  /** @param {PointerEvent & { currentTarget: HTMLElement }} event */
   function handleMove(event) {
     const rect = event.currentTarget.getBoundingClientRect();
     const x = (event.clientX - rect.left) / rect.width - 0.5;
@@ -37,12 +39,18 @@
   }
 
   function startTypingSequence() {
+    /** @type {number[]} */
     const timers = [];
 
+    /**
+     * @param {() => void} callback
+     * @param {number} delay
+     */
     const schedule = (callback, delay) => {
       timers.push(window.setTimeout(callback, delay));
     };
 
+    /** @param {number} index */
     const typeLine = (index) => {
       if (index >= trustItems.length) {
         activeLine = -1;
