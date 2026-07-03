@@ -8,6 +8,7 @@
   import FAQ from "./lib/components/FAQ.svelte";
   import Contact from "./lib/components/Contact.svelte";
   import FixedSocials from "./lib/components/FixedSocials.svelte";
+  import Footer from "./lib/components/Footer.svelte";
 </script>
 
 <svelte:head>
@@ -122,6 +123,8 @@
   <FAQ />
   <Contact />
 </main>
+
+<Footer />
 
 <style>
   .skip-link {
