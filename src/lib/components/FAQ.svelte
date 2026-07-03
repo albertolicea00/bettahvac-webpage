@@ -424,10 +424,6 @@
       font-size: 0.85rem;
     }
 
-    .areas-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
     .bubble p {
       font-size: 0.92rem;
     }
