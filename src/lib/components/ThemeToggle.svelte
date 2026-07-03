@@ -64,6 +64,10 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
+  
+  .theme-toggle-btn i {
+    font-size: 1.3em;
+  }
 
   .theme-toggle-btn:hover {
     background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.85));
@@ -112,7 +116,7 @@
       display: none;
     }
     .theme-toggle-btn {
-      padding: 0.5rem 0.75rem;
+      align-items: center;
     }
   }
 </style>
