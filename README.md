@@ -18,10 +18,6 @@ This repository hosts the **BettaHVAC** landing page—a high-performance, visua
 - ⭐ **Trusted Reviews**: Modular integration system for Google Reviews and internal feedback synchronization.
 - 📱 **Mobile First**: Fully responsive design that looks incredible on every device.
 
-## 🛠️ Development & Contributing
-
-Contributions are welcome! For instructions on how to set up, run, and contribute to this project, please refer to the [CONTRIBUTING.md](./CONTRIBUTING.md) guide.
-
 ## 📄 License
 
 This project's source code is licensed under the **Apache License, Version 2.0**. Please note that the logo, trademarks, brand identity, and all images/media assets are proprietary and **not** covered by this license. See the [LICENSE](LICENSE), [NOTICE](NOTICE), and [TRADEMARKS](TRADEMARKS) files for details.
