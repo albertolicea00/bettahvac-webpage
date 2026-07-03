@@ -10,7 +10,7 @@
   });
 
   const toggleTheme = () => {
-    theme = theme === "hot" ? "cool" : "hot";
+    theme = theme === "hot" ? "cold" : "hot";
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("hvac-theme", theme);
   };
@@ -20,15 +20,15 @@
   <button
     class="theme-toggle-btn {theme}"
     onclick={toggleTheme}
-    aria-label={theme === "hot" ? "Switch to cool mode" : "Switch to hot mode"}
-    aria-pressed={theme === "cool"}
+    aria-label={theme === "hot" ? "Switch to cold mode" : "Switch to hot mode"}
+    aria-pressed={theme === "cold"}
   >
     {#if theme === "hot"}
       <i class="fa-solid fa-fire text-hot animate-pulse" aria-hidden="true"></i>
       <span class="mode-text">Hot</span>
     {:else}
-      <i class="fa-solid fa-snowflake text-cool animate-float-slow" aria-hidden="true"></i>
-      <span class="mode-text">Cool</span>
+      <i class="fa-solid fa-snowflake text-cold animate-float-slow" aria-hidden="true"></i>
+      <span class="mode-text">Cold</span>
     {/if}
   </button>
 </div>
@@ -85,7 +85,7 @@
     color: #ff6b35;
   }
 
-  .text-cool {
+  .text-cold {
     color: #7dd3fc;
   }
 
