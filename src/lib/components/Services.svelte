@@ -1,24 +1,45 @@
 <script>
+  import { onMount } from "svelte";
+
   const services = [
     {
       id: "ac-repair",
       title: "A/C Repair",
       description: "Fast and reliable air conditioning repair services to keep you cool all summer long.",
-      icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><path d="M7 9h10M9 12h6"/></svg>`
+      sprite: "ac"
     },
     {
       id: "heating-installation",
       title: "Heating Installation",
       description: "Expert installation of energy-efficient heating systems for lasting comfort during winter.",
-      icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2c0 0-4 4-4 8a4 4 0 0 0 8 0c0-4-4-8-4-8z"/><path d="M8.5 14.5C7 16 7 18 8.5 19.5"/><path d="M15.5 14.5C17 16 17 18 15.5 19.5"/><line x1="12" y1="22" x2="12" y2="19"/></svg>`
+      sprite: "panel"
     },
     {
       id: "maintenance",
       title: "Preventative Maintenance",
       description: "Regular tune-ups to extend equipment life, improve efficiency, and prevent costly breakdowns.",
-      icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>`
+      sprite: "car"
     }
   ];
+
+  // Theme is set on <html data-theme="hot|cold"> by ThemeToggle.
+  // We mirror it here so the sprite swaps when the user toggles.
+  let theme = $state("hot");
+
+  onMount(() => {
+    theme = document.documentElement.getAttribute("data-theme") || "hot";
+    const obs = new MutationObserver(() => {
+      const t = document.documentElement.getAttribute("data-theme");
+      if (t && t !== theme) theme = t;
+    });
+    obs.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"]
+    });
+    return () => obs.disconnect();
+  });
+
+  const spriteSrc = $derived((name) => `/assets/generated/sprite-${name}-${theme}.webp`);
 </script>
 
 <section id="services" class="section section-alt">
@@ -31,7 +52,7 @@
       {#each services as service, i}
         <article class="service-card" style="animation-delay: {i * 0.15}s" aria-labelledby="service-{service.id}">
           <div class="card-icon" aria-hidden="true">
-            {@html service.icon}
+            <img src={spriteSrc(service.sprite)} alt="" class="card-sprite" />
           </div>
           <h3 class="card-title" id="service-{service.id}">{service.title}</h3>
           <p class="card-desc">{service.description}</p>
@@ -45,14 +66,6 @@
   .section-header {
     margin-bottom: 3rem;
     text-align: center;
-  }
-
-  .section-lead {
-    font-size: 1.1rem;
-    color: var(--color-text-light);
-    max-width: 560px;
-    line-height: 1.7;
-    margin: 0 auto;
   }
 
   .services-grid {
@@ -102,22 +115,26 @@
   }
 
   .card-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
-    color: white;
+    width: 120px;
+    height: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
-    box-shadow: 0 4px 10px rgba(15, 59, 140, 0.3);
+    margin: 0 auto;
     flex-shrink: 0;
+  }
+
+  .card-sprite {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    transform: scale(3);
   }
 
   .card-title {
     font-size: 1.4rem;
+    margin-top: 2.5rem;
     margin-bottom: 0.75rem;
     color: var(--color-primary);
   }
