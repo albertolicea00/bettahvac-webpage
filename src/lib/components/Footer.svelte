@@ -1,8 +1,14 @@
 <script>
   import { reveal } from "../actions/reveal.js";
+  import {
+    getEmail,
+    getEmailHref,
+    getPhoneDisplay,
+    getPhoneHref,
+  } from "../contact.js";
 
-  const phone = "(555) 123-4567";
-  const email = "fake@bettahvac.com";
+  const phone = getPhoneDisplay();
+  const email = getEmail();
 
   const navLinks = [
     { label: "Reviews", href: "#reviews" },
@@ -25,11 +31,11 @@
           Professional Heating & Cooling Services in Lexington, KY and surrounding areas.
         </p>
         <div class="contact-info">
-          <a href="tel:{phone}" class="contact-item">
+          <a href={getPhoneHref()} class="contact-item">
             <i class="fa-solid fa-phone" aria-hidden="true"></i>
             {phone}
           </a>
-          <a href="mailto:{email}" class="contact-item">
+          <a href={getEmailHref()} class="contact-item">
             <i class="fa-solid fa-envelope" aria-hidden="true"></i>
             {email}
           </a>

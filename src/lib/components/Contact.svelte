@@ -1,5 +1,10 @@
 <script>
   import { reveal } from "../actions/reveal.js";
+  import {
+    getEmailHref,
+    getPhoneHref,
+    getWhatsAppHref,
+  } from "../contact.js";
 </script>
 
 <section id="contact">
@@ -10,18 +15,18 @@
       advice for your home or business.
     </p>
     <div class="cta-buttons">
-      <a href="tel:1-800-911-HVAC" class="cta-btn cta-primary">
+      <a href={getPhoneHref()} class="cta-btn cta-primary">
         <i class="fa-solid fa-phone"></i> Call Us Now
       </a>
       <a
-        href="https://wa.me/15551234567"
+        href={getWhatsAppHref()}
         target="_blank"
         rel="noopener noreferrer"
         class="cta-btn cta-whatsapp"
       >
         <i class="fa-brands fa-whatsapp"></i> WhatsApp
       </a>
-      <a href="mailto:fake@bettahvac.com" class="cta-btn cta-secondary">
+      <a href={getEmailHref()} class="cta-btn cta-secondary">
         <i class="fa-solid fa-envelope"></i> Email Us
       </a>
     </div>

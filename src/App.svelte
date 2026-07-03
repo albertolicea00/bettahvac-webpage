@@ -38,7 +38,6 @@
     "description": "Professional heating, ventilation, and air conditioning services in Lexington, KY and surrounding areas.",
     "url": "https://bettahvac.com",
     "telephone": "(555) 123-4567",
-    "email": "fake@bettahvac.com",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Lexington",
