@@ -87,7 +87,7 @@
 
   .cta-whatsapp {
     background: #25d366;
-    color: white;
+    color: #3d3d3d;
     box-shadow: var(--shadow-md);
   }
 
