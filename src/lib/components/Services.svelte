@@ -16,14 +16,13 @@
     },
     {
       id: "maintenance",
-      title: "Preventative Maintenance",
+      title: "Prev Maintenance",
       description: "Regular tune-ups to extend equipment life, improve efficiency, and prevent costly breakdowns.",
       sprite: "car"
     }
   ];
 
   // Theme is set on <html data-theme="hot|cold"> by ThemeToggle.
-  // We mirror it here so the sprite swaps when the user toggles.
   let theme = $state("hot");
 
   onMount(() => {
@@ -40,6 +39,27 @@
   });
 
   const spriteSrc = $derived((name) => `/assets/generated/sprite-${name}-${theme}.webp`);
+
+  // Per-sprite 3D tilt — same effect as the Kentucky map:
+  // the cursor position drives rotateX/rotateY on the sprite only,
+  // and the drop-shadow grows while tilting.
+  const MAX_TILT = 10; // degrees
+  let tilts = $state(services.map(() => ({ x: 0, y: 0, active: false })));
+
+  function handleMove(i, event) {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+    tilts[i].x = -y * MAX_TILT * 2;
+    tilts[i].y = x * MAX_TILT * 2;
+    tilts[i].active = true;
+  }
+
+  function resetTilt(i) {
+    tilts[i].x = 0;
+    tilts[i].y = 0;
+    tilts[i].active = false;
+  }
 </script>
 
 <section id="services" class="section section-alt">
@@ -50,7 +70,15 @@
 
     <div class="services-grid">
       {#each services as service, i}
-        <article class="service-card" style="animation-delay: {i * 0.15}s" aria-labelledby="service-{service.id}">
+        <article
+          class="service-card"
+          class:tilting={tilts[i].active}
+          aria-labelledby="service-{service.id}"
+          style="--tilt-x: {tilts[i].x}deg; --tilt-y: {tilts[i].y}deg"
+          onpointermove={(e) => handleMove(i, e)}
+          onpointerleave={() => resetTilt(i)}
+          onpointercancel={() => resetTilt(i)}
+        >
           <div class="card-icon" aria-hidden="true">
             <img src={spriteSrc(service.sprite)} alt="" class="card-sprite" />
           </div>
@@ -74,44 +102,26 @@
     gap: 2rem;
   }
 
+  /* Liquid glass base card — the tilt only affects the sprite, not the card */
   .service-card {
     background: var(--color-bg);
-    padding: 2.5rem 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    padding: 2.5rem 2rem;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                box-shadow 0.4s ease;
     position: relative;
     overflow: hidden;
-    animation: fadeInUp 0.8s ease forwards;
-    opacity: 0;
-    border-bottom: 4px solid transparent;
-  }
-
-  .service-card::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(
-      to right,
-      var(--color-primary),
-      var(--color-accent),
-      var(--color-secondary)
-    );
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s ease;
   }
 
   .service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: var(--shadow-lg);
-  }
-
-  .service-card:hover::after {
-    transform: scaleX(1);
+    transform: translateY(-8px);
+    box-shadow:
+      0 18px 50px rgba(0, 0, 0, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
   }
 
   .card-icon {
@@ -122,7 +132,6 @@
     justify-content: center;
     margin: 0 auto 1.5rem;
     perspective: 900px;
-    touch-action: pan-y;
     position: relative;
     z-index: 1;
   }
@@ -132,31 +141,43 @@
     height: 100%;
     object-fit: contain;
     display: block;
-    transform: scale(3.2);
+    transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease, filter 0.5s ease;
+    filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.28));
+    will-change: transform;
+    user-select: none;
+    transform: scale(2.8);
+    -webkit-user-drag: none;
+  }
+
+  .service-card.tilting .card-sprite {
+    transition: transform 0.08s linear, filter 0.3s ease;
+    filter: drop-shadow(0 28px 45px rgba(0, 0, 0, 0.35));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .service-card,
+    .card-sprite {
+      transform: none;
+      transition: none;
+    }
   }
 
   .card-title {
     font-size: 1.4rem;
-    margin-top: 2.5rem;
     margin-bottom: 0.75rem;
     color: var(--color-primary);
+    position: relative;
+    z-index: 1;
   }
 
   .card-desc {
     color: var(--color-text-light);
     line-height: 1.7;
     margin: 0;
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    position: relative;
+    z-index: 1;
   }
 
   @media (max-width: 768px) {

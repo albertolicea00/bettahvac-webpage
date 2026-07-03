@@ -1,5 +1,5 @@
 <section id="contact">
-  <div class="cta-banner">
+  <div class="cta-banner scroll-reveal" style="--reveal-delay: 0ms">
     <h3>Still have questions?</h3>
     <p>
       Our technicians are ready to provide technical support and personalized

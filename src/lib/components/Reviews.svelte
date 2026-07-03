@@ -51,7 +51,7 @@
 
 <section id="reviews" class="section section-alt">
   <div class="container">
-    <div class="reviews-header">
+    <div class="reviews-header scroll-reveal" style="--reveal-delay: 0ms">
       <div>
         <h2 class="section-title" style="margin-bottom: 0.5rem;">
           Customer Reviews
@@ -75,7 +75,7 @@
 
     <!-- Submission Form -->
     {#if showForm}
-      <div class="review-form-container glass-panel">
+      <div class="review-form-container glass-panel scroll-reveal" style="--reveal-delay: 80ms">
         <h3>Rate your experience with bettaHVAC</h3>
         <form onsubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
           <!-- Honeypot Field (Hidden from real users via CSS) -->
@@ -135,8 +135,8 @@
       </p>
     {:else}
       <div class="reviews-grid">
-        {#each reviewsData.reviews as review}
-          <div class="review-card">
+        {#each reviewsData.reviews as review, i}
+          <div class="review-card scroll-reveal" style="--reveal-delay: {i * 110}ms">
             <div class="review-header">
               <div class="avatar">{review.author.charAt(0)}</div>
               <div class="meta">
@@ -148,6 +148,7 @@
               {"★".repeat(review.rating)}{"☆".repeat(5 - review.rating)}
             </div>
             <p class="review-text">{review.text}</p>
+            <span class="tail" aria-hidden="true"></span>
           </div>
         {/each}
       </div>
@@ -194,7 +195,6 @@
   .review-form-container {
     padding: 2rem;
     margin-bottom: 3rem;
-    animation: slideDown 0.3s ease;
   }
 
   .review-form-container h3 {
@@ -234,10 +234,11 @@
   }
 
   .review-card {
+    position: relative;
     background: var(--color-bg);
     border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: var(--radius-md);
-    padding: 1.5rem;
+    border-radius: 20px 20px 20px 6px;
+    padding: 1.5rem 1.5rem 1.75rem;
     box-shadow: var(--shadow-sm);
     transition:
       transform 0.3s ease,
@@ -247,6 +248,20 @@
   .review-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-md);
+  }
+
+  /* Speech bubble tail at the bottom-left */
+  .tail {
+    position: absolute;
+    left: 18px;
+    bottom: -10px;
+    width: 18px;
+    height: 18px;
+    background: var(--color-bg);
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    transform: rotate(45deg);
+    border-bottom-right-radius: 4px;
   }
 
   .review-header {
@@ -288,17 +303,6 @@
     color: var(--color-text);
     font-size: 1rem;
     line-height: 1.5;
-  }
-
-  @keyframes slideDown {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 
   @media (max-width: 1024px) {

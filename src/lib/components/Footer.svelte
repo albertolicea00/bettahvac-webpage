@@ -15,7 +15,7 @@
   <div class="container">
     <div class="footer-grid">
       <!-- Brand Column -->
-      <div class="footer-brand">
+      <div class="footer-brand scroll-reveal" style="--reveal-delay: 0ms">
         <div class="brand-logo">
           <span class="brand-white">betta</span><span class="brand-accent">HVAC</span>
         </div>
@@ -35,7 +35,7 @@
       </div>
 
       <!-- Quick Links Column -->
-      <div class="footer-col">
+      <div class="footer-col scroll-reveal" style="--reveal-delay: 120ms">
         <h3 class="col-title">Quick Links</h3>
         <nav aria-label="Footer navigation">
           <ul class="footer-links">
@@ -49,7 +49,7 @@
       </div>
 
       <!-- Social Column -->
-      <div class="footer-col">
+      <div class="footer-col scroll-reveal" style="--reveal-delay: 240ms">
         <h3 class="col-title">Follow Us</h3>
         <div class="social-links">
           <a href="https://facebook.com/bettahvac" target="_blank" rel="noopener noreferrer" class="social-btn facebook" aria-label="Follow bettaHVAC on Facebook">

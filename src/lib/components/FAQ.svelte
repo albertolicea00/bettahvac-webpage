@@ -1,5 +1,5 @@
 <script>
-  let visibleCount = $state(0);
+  import { onMount } from "svelte";
 
   const faqs = [
     {
@@ -20,15 +20,137 @@
     }
   ];
 
-  $effect(() => {
-    const interval = setInterval(() => {
-      if (visibleCount < faqs.length * 2) {
-        visibleCount++;
-      } else {
-        clearInterval(interval);
+  let chatWindowElement;
+  let typedQuestions = $state(faqs.map(() => ""));
+  let typedAnswers = $state(faqs.map(() => ""));
+  let visibleQuestions = $state(faqs.map(() => false));
+  let visibleAnswers = $state(faqs.map(() => false));
+  let activeLine = $state({ role: "", index: -1 });
+  let typingStarted = false;
+  let cancelled = false;
+
+  const wait = (duration) =>
+    new Promise((resolve) => {
+      window.setTimeout(resolve, duration);
+    });
+
+  async function typeLine(
+    target,
+    visibility,
+    index,
+    text,
+    role,
+    speed,
+    startDelay = 0
+  ) {
+    if (startDelay > 0) {
+      await wait(startDelay);
+    }
+
+    if (cancelled) {
+      return;
+    }
+
+    visibility[index] = true;
+    activeLine = { role, index };
+    target[index] = "";
+
+    for (let charIndex = 0; charIndex < text.length; charIndex += 1) {
+      if (cancelled) {
+        return;
       }
-    }, 400);
-    return () => clearInterval(interval);
+
+      target[index] = text.slice(0, charIndex + 1);
+      await wait(speed);
+    }
+
+    if (!cancelled && activeLine.role === role && activeLine.index === index) {
+      activeLine = { role: "", index: -1 };
+    }
+  }
+
+  async function runConversation() {
+    if (typingStarted) {
+      return;
+    }
+
+    typingStarted = true;
+
+    for (const [index, faq] of faqs.entries()) {
+      await typeLine(
+        typedQuestions,
+        visibleQuestions,
+        index,
+        faq.question,
+        "question",
+        4,
+        index === 0 ? 40 : 0
+      );
+
+      if (cancelled) {
+        return;
+      }
+
+      await wait(40);
+
+      await typeLine(
+        typedAnswers,
+        visibleAnswers,
+        index,
+        faq.answer,
+        "answer",
+        3,
+        12
+      );
+
+      if (cancelled) {
+        return;
+      }
+
+      if (index < faqs.length - 1) {
+        await wait(60);
+      }
+    }
+  }
+
+  onMount(() => {
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (reduceMotion) {
+      typedQuestions = faqs.map((faq) => faq.question);
+      typedAnswers = faqs.map((faq) => faq.answer);
+      visibleQuestions = faqs.map(() => true);
+      visibleAnswers = faqs.map(() => true);
+      return () => {};
+    }
+
+    if (!chatWindowElement) {
+      return () => {};
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          observer.disconnect();
+          runConversation();
+          break;
+        }
+      },
+      {
+        threshold: 0.35,
+        rootMargin: "0px 0px -10% 0px"
+      }
+    );
+
+    observer.observe(chatWindowElement);
+
+    return () => {
+      cancelled = true;
+      observer.disconnect();
+    };
   });
 </script>
 
@@ -38,41 +160,49 @@
       <h2 class="section-title">Frequently Asked Questions</h2>
     </div>
 
-    <div class="chat-window">
+    <div class="chat-window" bind:this={chatWindowElement}>
       <div class="chat-messages">
         {#each faqs as faq, i}
-          <div
-            class="chat-row customer-row {visibleCount > i * 2 ? 'visible' : ''}"
-            style="animation-delay: {i * 0.6}s;"
-          >
-            <div class="avatar customer-avatar">
-              <i class="fa-solid fa-user"></i>
-            </div>
-            <div class="bubble-wrap customer-wrap">
-              <div class="bubble customer-bubble">
-                <p>{faq.question}</p>
+          {#if visibleQuestions[i]}
+            <div class="chat-row customer-row">
+              <div class="avatar customer-avatar">
+                <i class="fa-solid fa-user"></i>
               </div>
-              <span class="chat-label">Customer</span>
+              <div class="bubble-wrap customer-wrap">
+                <div class="bubble customer-bubble">
+                  <p>
+                    {typedQuestions[i]}
+                    {#if activeLine.role === "question" && activeLine.index === i && typedQuestions[i].length < faq.question.length}
+                      <span class="typing-caret" aria-hidden="true">|</span>
+                    {/if}
+                  </p>
+                </div>
+                <span class="chat-label">Customer</span>
+              </div>
             </div>
-          </div>
+          {/if}
 
-          <div
-            class="chat-row team-row {visibleCount > i * 2 + 1 ? 'visible' : ''}"
-            style="animation-delay: {i * 0.6 + 0.3}s;"
-          >
-            <div class="bubble-wrap team-wrap">
-              <span class="team-badge">
-                <i class="fa-solid fa-circle-check"></i> BettaHVAC Team
-              </span>
-              <div class="bubble team-bubble">
-                <p>{faq.answer}</p>
+          {#if visibleAnswers[i]}
+            <div class="chat-row team-row">
+              <div class="bubble-wrap team-wrap">
+                <span class="team-badge">
+                  <i class="fa-solid fa-circle-check"></i> BettaHVAC Team
+                </span>
+                <div class="bubble team-bubble">
+                  <p>
+                    {typedAnswers[i]}
+                    {#if activeLine.role === "answer" && activeLine.index === i && typedAnswers[i].length < faq.answer.length}
+                      <span class="typing-caret" aria-hidden="true">|</span>
+                    {/if}
+                  </p>
+                </div>
+                <span class="chat-label team-label">BettaHVAC Team</span>
               </div>
-              <span class="chat-label team-label">BettaHVAC Team</span>
+              <div class="avatar team-avatar">
+                <i class="fa-solid fa-headset"></i>
+              </div>
             </div>
-            <div class="avatar team-avatar">
-              <i class="fa-solid fa-headset"></i>
-            </div>
-          </div>
+          {/if}
         {/each}
       </div>
 
@@ -115,16 +245,6 @@
     display: flex;
     align-items: flex-start;
     gap: 0.75rem;
-    opacity: 0;
-    transform: translateY(20px);
-    transition:
-      opacity 0.5s ease,
-      transform 0.5s ease;
-  }
-
-  .chat-row.visible {
-    opacity: 1;
-    transform: translateY(0);
   }
 
   .customer-row {
@@ -213,6 +333,7 @@
   .bubble p {
     margin: 0;
     font-size: 1rem;
+    min-height: 1.55em;
   }
 
   .customer-bubble {
@@ -234,6 +355,7 @@
 
   .team-bubble p {
     color: var(--color-text);
+    text-align: right;
   }
 
   .chat-label {
@@ -313,7 +435,30 @@
     }
   }
 
+  .typing-caret {
+    display: inline-block;
+    color: var(--color-primary);
+    font-weight: 700;
+    margin-left: 0.08em;
+    animation: caretBlink 0.9s steps(2, start) infinite;
+  }
 
+  @keyframes caretBlink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .typing-caret {
+      animation: none;
+      opacity: 0;
+    }
+  }
 
   @media (max-width: 768px) {
     .chat-window {
@@ -342,6 +487,5 @@
     .bubble p {
       font-size: 0.92rem;
     }
-
   }
 </style>
