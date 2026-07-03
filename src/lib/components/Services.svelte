@@ -75,6 +75,10 @@
   <div class="container">
     <div class="section-header" use:reveal>
       <h2 class="section-title">Services</h2>
+      <p class="section-subtitle">
+        Heating, cooling, and maintenance solutions tailored to your home or
+        business... done right the first time.
+      </p>
     </div>
 
     <div class="services-grid">
@@ -104,6 +108,17 @@
   .section-header {
     margin-bottom: 3rem;
     text-align: center;
+  }
+
+  .section-title {
+    margin-buttom: 1rem;
+  }
+  .section-subtitle {
+    margin: 0.75rem auto 0;
+    max-width: 540px;
+    color: var(--color-text-light);
+    font-size: 1.1rem;
+    line-height: 1.6;
   }
 
   .services-grid {
