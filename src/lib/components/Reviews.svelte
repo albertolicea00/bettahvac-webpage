@@ -137,7 +137,7 @@
       </p>
     {:else}
       <div class="reviews-grid">
-        {#each reviewsData.reviews as review, i}
+        {#each reviewsData.reviews as review, i (review.id)}
           <div class="review-card" use:reveal={{ delay: i * 110 }}>
             <div class="review-header">
               <div class="avatar">{review.author.charAt(0)}</div>

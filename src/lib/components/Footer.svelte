@@ -41,7 +41,7 @@
         <h3 class="col-title">Quick Links</h3>
         <nav aria-label="Footer navigation">
           <ul class="footer-links">
-            {#each navLinks as link}
+            {#each navLinks as link (link.href)}
               <li>
                 <a href={link.href}>{link.label}</a>
               </li>
