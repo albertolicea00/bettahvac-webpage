@@ -97,6 +97,9 @@
       <a href="tel:1-800-911-HVAC" class="cta-btn cta-primary">
         <i class="fa-solid fa-phone"></i> Call Us Now
       </a>
+      <a href="mailto:fake@bettahvac.com" class="cta-btn cta-secondary">
+        <i class="fa-solid fa-envelope"></i> Email Us
+      </a>
     </div>
   </div>
 </section>
@@ -108,6 +111,7 @@
 
   .chat-header {
     margin-bottom: 3rem;
+    text-align: center;
   }
 
   .chat-window {
@@ -204,6 +208,22 @@
     padding: 1rem 1.25rem;
     border-radius: 18px;
     line-height: 1.55;
+    /* Shared glass base */
+    background: var(--color-glass-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--color-glass-border);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .bubble:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 12px 40px rgba(0, 0, 0, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
   }
 
   .bubble p {
@@ -212,22 +232,24 @@
   }
 
   .customer-bubble {
-    background: var(--color-glass-bg);
-    border: 1px solid var(--color-glass-border);
     color: var(--color-text);
     border-radius: 18px 18px 18px 4px;
-    box-shadow: var(--shadow-sm);
   }
 
   .team-bubble {
-    background: linear-gradient(
-      135deg,
-      var(--color-primary),
-      var(--color-primary-light)
-    );
-    color: white;
+    color: var(--color-text);
     border-radius: 18px 18px 4px 18px;
-    box-shadow: 0 4px 15px rgba(15, 59, 140, 0.25);
+    /* Slight primary tint on top of the glass base */
+    background:
+      linear-gradient(135deg,
+        color-mix(in srgb, var(--color-primary) 12%, transparent),
+        color-mix(in srgb, var(--color-primary-light) 6%, transparent)),
+      var(--color-glass-bg);
+    border-color: color-mix(in srgb, var(--color-primary) 35%, var(--color-glass-border));
+  }
+
+  .team-bubble p {
+    color: var(--color-text);
   }
 
   .chat-label {
@@ -249,7 +271,7 @@
     gap: 0.35rem;
     font-size: 0.75rem;
     font-weight: 700;
-    color: white;
+    color: var(--color-primary-light);
     padding: 0 0.25rem;
   }
 
@@ -364,6 +386,20 @@
     box-shadow: 0 8px 25px rgba(15, 59, 140, 0.35);
   }
 
+  .cta-secondary {
+    background: var(--color-bg);
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .cta-secondary:hover {
+    background: var(--color-primary);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
   @media (max-width: 768px) {
     .chat-window {
       padding: 1rem 0;
@@ -386,6 +422,10 @@
       height: 36px;
       min-width: 36px;
       font-size: 0.85rem;
+    }
+
+    .areas-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
 
     .bubble p {
