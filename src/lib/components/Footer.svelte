@@ -71,7 +71,7 @@
     position: relative;
     /* Hero background image */
     background: var(--hero-bg) center/cover no-repeat;
-    padding: 5rem 0 3rem;
+    padding: 5rem 0 0;
   }
 
   /* Dark overlay like the hero */
@@ -96,7 +96,6 @@
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr;
     gap: 3rem;
-    margin-bottom: 3rem;
     padding-bottom: 3rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
@@ -118,7 +117,7 @@
   }
 
   .brand-white {
-    color: var(--color-text);
+    color: white;
   }
 
   .brand-accent {
@@ -269,7 +268,7 @@
 
   @media (max-width: 600px) {
     .site-footer {
-      padding: 3rem 0 1.5rem;
+      padding: 3rem 0 0;
     }
 
     .footer-grid {
