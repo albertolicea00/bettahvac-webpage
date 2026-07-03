@@ -1,5 +1,9 @@
+<script>
+  import { reveal } from "../actions/reveal.js";
+</script>
+
 <section id="contact">
-  <div class="cta-banner scroll-reveal" style="--reveal-delay: 0ms">
+  <div class="cta-banner" use:reveal>
     <h3>Still have questions?</h3>
     <p>
       Our technicians are ready to provide technical support and personalized

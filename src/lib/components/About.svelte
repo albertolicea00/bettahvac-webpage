@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte";
+  import { reveal } from "../actions/reveal.js";
 
   const MAX_TILT = 10;
 
@@ -124,9 +125,9 @@
 <section id="about" class="section">
   <div class="container about-wrapper">
     <div
-      class="about-col scroll-reveal"
+      class="about-col"
       bind:this={aboutColElement}
-      style="--reveal-delay: 0ms"
+      use:reveal={{ from: "left" }}
     >
       <h2 class="section-title">About <span class="brand-light">betta</span>HVAC</h2>
       <p class="about-desc">
@@ -150,7 +151,7 @@
       </ul>
     </div>
 
-    <div class="map-col scroll-reveal" style="--reveal-delay: 140ms">
+    <div class="map-col" use:reveal={{ from: "right", delay: 150 }}>
       <div
         class="map-tilt"
         class:tilting

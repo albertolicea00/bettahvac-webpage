@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte";
+  import { reveal } from "../actions/reveal.js";
 
   const services = [
     {
@@ -64,7 +65,7 @@
 
 <section id="services" class="section section-alt">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header" use:reveal>
       <h2 class="section-title">Services</h2>
     </div>
 
@@ -74,6 +75,7 @@
           class="service-card"
           class:tilting={tilts[i].active}
           aria-labelledby="service-{service.id}"
+          use:reveal={{ from: "scale", delay: i * 130 }}
           style="--tilt-x: {tilts[i].x}deg; --tilt-y: {tilts[i].y}deg"
           onpointermove={(e) => handleMove(i, e)}
           onpointerleave={() => resetTilt(i)}

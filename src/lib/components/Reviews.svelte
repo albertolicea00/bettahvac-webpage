@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { fetchReviews, postReview } from "../ReviewService.js";
+  import { reveal } from "../actions/reveal.js";
 
   let reviewsData = { averageRating: 0, totalReviews: 0, reviews: [] };
   let loading = true;
@@ -51,7 +52,7 @@
 
 <section id="reviews" class="section section-alt">
   <div class="container">
-    <div class="reviews-header scroll-reveal" style="--reveal-delay: 0ms">
+    <div class="reviews-header" use:reveal>
       <div>
         <h2 class="section-title" style="margin-bottom: 0.5rem;">
           Customer Reviews
@@ -75,7 +76,7 @@
 
     <!-- Submission Form -->
     {#if showForm}
-      <div class="review-form-container glass-panel scroll-reveal" style="--reveal-delay: 80ms">
+      <div class="review-form-container glass-panel" use:reveal={{ from: "scale" }}>
         <h3>Rate your experience with bettaHVAC</h3>
         <form onsubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
           <!-- Honeypot Field (Hidden from real users via CSS) -->
@@ -136,7 +137,7 @@
     {:else}
       <div class="reviews-grid">
         {#each reviewsData.reviews as review, i}
-          <div class="review-card scroll-reveal" style="--reveal-delay: {i * 110}ms">
+          <div class="review-card" use:reveal={{ delay: i * 110 }}>
             <div class="review-header">
               <div class="avatar">{review.author.charAt(0)}</div>
               <div class="meta">

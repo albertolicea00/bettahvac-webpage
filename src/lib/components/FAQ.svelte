@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte";
+  import { reveal } from "../actions/reveal.js";
 
   const faqs = [
     {
@@ -156,11 +157,11 @@
 
 <section id="faq" class="section chat-faq-section">
   <div class="container">
-    <div class="chat-header">
+    <div class="chat-header" use:reveal>
       <h2 class="section-title">Frequently Asked Questions</h2>
     </div>
 
-    <div class="chat-window" bind:this={chatWindowElement}>
+    <div class="chat-window" bind:this={chatWindowElement} use:reveal={{ from: "scale", delay: 120 }}>
       <div class="chat-messages">
         {#each faqs as faq, i}
           {#if visibleQuestions[i]}
