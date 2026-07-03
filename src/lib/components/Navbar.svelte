@@ -135,21 +135,19 @@
     gap: 0.25rem;
     margin: 0;
     padding: 0.5rem 0.75rem;
-    background: linear-gradient(135deg, rgba(15, 23, 42, 0.55), rgba(30, 41, 59, 0.55));
-    backdrop-filter: blur(24px) saturate(200%);
-    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 50px;
-    box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     transition: all 0.4s ease;
   }
 
   .navbar.scrolled .nav-links {
-    background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.85));
+    background: rgba(0, 0, 0, 0.65);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    border-color: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.08);
   }
 
   .nav-links li a {
