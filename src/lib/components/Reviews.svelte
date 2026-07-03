@@ -304,7 +304,18 @@
     position: relative;
     padding: 2rem;
     background: var(--color-bg);
+    color: var(--color-text);
     border-radius: var(--radius-lg);
+  }
+
+  /* Honeypot: pulled off-screen instead of display:none so naive bots
+     still "see" and fill it, while real users never do */
+  .oh-no-bots {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
   }
 
   .review-form-container h3 {
@@ -386,9 +397,17 @@
   .form-group input,
   .form-group textarea {
     padding: 0.75rem;
-    border: 1px solid #ccc;
+    background: var(--color-bg-alt);
+    color: var(--color-text);
+    border: 1px solid rgba(128, 128, 128, 0.4);
     border-radius: var(--radius-sm);
     font-family: var(--font-body);
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: var(--color-text-light);
+    opacity: 0.7;
   }
 
   .form-group input:focus,
