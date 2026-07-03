@@ -71,7 +71,7 @@
 :root[data-theme="cold"] {
   --color-primary: #0ea5e9; /* Sky Blue */
   --color-primary-light: #38bdf8;
-  --color-secondary: #8b5cf6; /* Cool Purple */
+  --color-secondary: #8b5cf6; /* cold Purple */
   --color-secondary-light: #a78bfa;
   --color-accent: #2dd4bf; /* Teal */
   --color-accent-light: #5eead4;
@@ -89,7 +89,7 @@
     0 8px 10px -6px rgba(14, 165, 233, 0.08);
 
   /* Hero Specifics */
-  --hero-bg: url("/assets/img/hero_cool.avif");
+  --hero-bg: url("/assets/img/hero_cold.avif");
   --hero-overlay: linear-gradient(180deg, rgba(15, 59, 140, 0.85) 0%, rgba(15, 59, 140, 0.6) 100%);
 }
 
