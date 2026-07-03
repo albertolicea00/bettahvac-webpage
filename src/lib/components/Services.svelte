@@ -21,13 +21,10 @@
   ];
 </script>
 
-<section id="services" class="section">
+<section id="services" class="section section-alt">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Our Services</h2>
-      <p class="section-lead">
-        Professional and reliable HVAC solutions tailored to your home and business needs.
-      </p>
+      <h2 class="section-title">Services</h2>
     </div>
 
     <div class="services-grid">
@@ -47,6 +44,7 @@
 <style>
   .section-header {
     margin-bottom: 3rem;
+    text-align: center;
   }
 
   .section-lead {
@@ -54,7 +52,7 @@
     color: var(--color-text-light);
     max-width: 560px;
     line-height: 1.7;
-    margin: 0;
+    margin: 0 auto;
   }
 
   .services-grid {
