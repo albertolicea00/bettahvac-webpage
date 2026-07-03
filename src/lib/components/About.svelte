@@ -1,5 +1,11 @@
 <script>
   let imgFailed = $state(false);
+
+  const trustItems = [
+    { icon: "fa-shield-halved", text: "Licensed & Insured Professionals" },
+    { icon: "fa-clock", text: "24/7 Emergency Service" },
+    { icon: "fa-check-circle", text: "100% Satisfaction Guarantee" }
+  ];
 </script>
 
 <section id="about" class="section">
@@ -10,42 +16,19 @@
       <p class="about-desc">
         With years of experience, bettaHVAC provides top-tier heating, ventilation, and air conditioning services in Lexington, KY. We are dedicated to delivering reliable, efficient, and cost-effective comfort solutions for homes and businesses.
       </p>
-
-      <ul class="features" aria-label="Why choose bettaHVAC">
-        <li>
-          <span class="check" aria-hidden="true">✓</span> Licensed &amp; Insured Professionals
-        </li>
-        <li>
-          <span class="check" aria-hidden="true">✓</span> 24/7 Emergency Service
-        </li>
-        <li>
-          <span class="check" aria-hidden="true">✓</span> 100% Satisfaction Guarantee
-        </li>
-      </ul>
     </div>
 
-    <div class="about-image-col">
-      <div class="image-frame" class:placeholder-active={imgFailed}>
-        {#if !imgFailed}
-          <img
-            src="/assets/img/owner.jpg"
-            alt="BettaHVAC team member — licensed HVAC professional"
-            class="owner-photo"
-            onerror={() => (imgFailed = true)}
-            width="400"
-            height="500"
-            loading="lazy"
-          />
-        {/if}
-        <div class="image-placeholder" aria-hidden="true">
-          <i class="fa-solid fa-user-tie"></i>
-          <span>Our Team</span>
-        </div>
-      </div>
-      <div class="image-caption">
-        <span class="caption-name">bettaHVAC</span>
-        <span class="caption-role">Proudly serving Lexington, KY</span>
-      </div>
+    <div class="trust-col">
+      <ul class="trust-list" aria-label="Why choose bettaHVAC">
+        {#each trustItems as item}
+          <li class="trust-item">
+            <div class="trust-icon" aria-hidden="true">
+              <i class="fa-solid {item.icon}"></i>
+            </div>
+            <span class="trust-text">{item.text}</span>
+          </li>
+        {/each}
+      </ul>
     </div>
   </div>
 </section>
@@ -74,111 +57,54 @@
   .about-desc {
     font-size: 1.1rem;
     color: var(--color-text);
-    margin-bottom: 2rem;
+    margin-bottom: 0;
     line-height: 1.7;
   }
 
-  .features {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .features li {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
+  .trust-col {
     display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    color: var(--color-text);
-    font-weight: 500;
-  }
-
-  .check {
-    color: var(--color-secondary);
-    font-weight: bold;
-    font-size: 1.2rem;
-    flex-shrink: 0;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
   }
 
-  .about-image-col {
+  .trust-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .trust-item {
+    display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.25rem;
   }
 
-  .image-frame {
-    width: 100%;
-    max-width: 400px;
-    aspect-ratio: 4 / 5;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    position: relative;
-    box-shadow: var(--shadow-premium);
-    border: 3px solid var(--color-accent);
-  }
-
-  .owner-photo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .image-placeholder {
-    position: absolute;
-    inset: 0;
+  .trust-icon {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    border-radius: 50%;
     background: linear-gradient(
       135deg,
       var(--color-primary),
       var(--color-primary-light)
     );
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    box-shadow: 0 4px 16px rgba(15, 59, 140, 0.25);
     color: white;
+    font-size: 1.25rem;
   }
 
-  .image-frame:not(.placeholder-active) .image-placeholder {
-    display: none;
-  }
-
-  .image-placeholder i {
-    font-size: 4rem;
-    opacity: 0.7;
-  }
-
-  .image-placeholder span {
-    font-size: 1.2rem;
+  .trust-text {
+    font-size: 1.1rem;
     font-weight: 600;
-    letter-spacing: 1px;
-    opacity: 0.8;
-  }
-
-  .image-caption {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.25rem;
-  }
-
-  .caption-name {
-    font-family: var(--font-heading);
-    font-size: 1.2rem;
-    font-weight: 700;
     color: var(--color-text);
-  }
-
-  .caption-role {
-    font-size: 0.9rem;
-    color: var(--color-text-light);
+    line-height: 1.4;
   }
 
   @media (max-width: 900px) {
@@ -187,12 +113,31 @@
       gap: 2.5rem;
     }
 
-    .about-image-col {
-      order: -1;
+    .trust-col {
+      align-items: center;
     }
 
-    .image-frame {
-      max-width: 300px;
+    .trust-list {
+      align-items: center;
+    }
+
+    .trust-item {
+      flex-direction: column;
+      text-align: center;
+      gap: 0.75rem;
+    }
+
+    .section-title {
+      text-align: center;
+    }
+
+    .divider {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .about-desc {
+      text-align: center;
     }
   }
 </style>
