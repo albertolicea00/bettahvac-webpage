@@ -40,9 +40,9 @@
       const tempTotal =
         reviewsData.averageRating * (reviewsData.totalReviews - 1) +
         newReview.rating;
-      reviewsData.averageRating = (
-        tempTotal / reviewsData.totalReviews
-      ).toFixed(1);
+      reviewsData.averageRating = Number(
+        (tempTotal / reviewsData.totalReviews).toFixed(1)
+      );
 
       showForm = false;
       newReview = { author: "", rating: 5, text: "" };
