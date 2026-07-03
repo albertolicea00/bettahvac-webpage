@@ -65,7 +65,7 @@
           onpointerleave={resetTilt}
           onpointercancel={resetTilt}
         >
-          <img src="/assets/kentucky-map.png" alt="Kentucky state silhouette map showing bettaHVAC service area" class="map-img" width="600" height="400" loading="lazy" draggable="false" />
+          <img src="/assets/kentucky-map.webp" alt="Kentucky state silhouette map showing bettaHVAC service area" class="map-img" width="600" height="400" loading="lazy" draggable="false" />
         </div>
         <div class="map-caption">
           <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
