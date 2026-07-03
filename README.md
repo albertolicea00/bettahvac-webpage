@@ -13,7 +13,6 @@ This repository hosts the **BettaHVAC** landing page—a high-performance, visua
 
 - 🚀 **Hypersonic Performance**: Powered by **Svelte 5** and **Vite** for near-instant load times and seamless transitions.
 - 🎨 **Premium Aesthetics**: A custom-crafted UI using HVAC-themed gradients (Ice Blue ❄️, Heat Red 🔥, and Gold 👑).
-- ⚙️ **Dynamic Content Engine**: Manage the entire site's copy, contact info, and services via a single JSON file (`src/lib/content.json`).
 - 🔥 **Climate-Responsive UI**: Integrated animations that shift based on the selected mode (Cool/Hot).
 - ⭐ **Trusted Reviews**: Modular integration system for Google Reviews and internal feedback synchronization.
 - 📱 **Mobile First**: Fully responsive design that looks incredible on every device.
