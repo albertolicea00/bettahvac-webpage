@@ -111,7 +111,7 @@
   }
 
   .section-title {
-    margin-buttom: 1rem;
+    margin-bottom: 1rem;
   }
   .section-subtitle {
     margin: 0.75rem auto 0;
