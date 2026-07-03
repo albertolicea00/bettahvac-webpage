@@ -120,8 +120,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
-    flex-shrink: 0;
+    margin: 0 auto 1.5rem;
+    perspective: 900px;
+    touch-action: pan-y;
+    position: relative;
+    z-index: 1;
   }
 
   .card-sprite {
@@ -129,7 +132,7 @@
     height: 100%;
     object-fit: contain;
     display: block;
-    transform: scale(3);
+    transform: scale(3.2);
   }
 
   .card-title {
