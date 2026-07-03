@@ -4,27 +4,68 @@
   import { reveal } from "../actions/reveal.js";
 
   /** @type {import("../ReviewService.js").ReviewsData} */
-  let reviewsData = { averageRating: 0, totalReviews: 0, reviews: [] };
-  let loading = true;
+  let reviewsData = $state({ averageRating: 0, totalReviews: 0, reviews: [] });
+  let loading = $state(true);
 
   // Form State
-  let showForm = false;
-  let newReview = { author: "", rating: 5, text: "" };
-  let submitting = false;
+  /** @type {HTMLDialogElement | undefined} */
+  let dialogElement;
+  let newReview = $state({ author: "", rating: 5, text: "" });
+  let hoverRating = $state(0);
+  let submitting = $state(false);
 
   // Anti-spam Honeypot
-  let honeypot = "";
+  let honeypot = $state("");
 
-  onMount(async () => {
-    reviewsData = await fetchReviews();
-    loading = false;
+  // Hash that opens the review dialog from any shared link, e.g. /#write-review
+  const FORM_HASH = "#write-review";
+
+  const openForm = () => {
+    if (dialogElement && !dialogElement.open) {
+      dialogElement.showModal();
+    }
+  };
+
+  const closeForm = () => {
+    dialogElement?.close();
+  };
+
+  // Runs on every close (button, Esc, backdrop): clear the hash so the
+  // shared link works again on the next click.
+  const handleDialogClose = () => {
+    hoverRating = 0;
+    if (window.location.hash === FORM_HASH) {
+      history.replaceState(
+        null,
+        "",
+        window.location.pathname + window.location.search
+      );
+    }
+  };
+
+  onMount(() => {
+    fetchReviews().then((data) => {
+      reviewsData = data;
+      loading = false;
+    });
+
+    const openFromHash = () => {
+      if (window.location.hash === FORM_HASH) {
+        openForm();
+      }
+    };
+
+    window.addEventListener("hashchange", openFromHash);
+    openFromHash();
+
+    return () => window.removeEventListener("hashchange", openFromHash);
   });
 
   const handleSubmit = async () => {
     // Honeypot check: If a bot fills this hidden field, silently reject the submission
     if (honeypot !== "") {
       console.warn("Bot detected by honeypot.");
-      showForm = false;
+      closeForm();
       newReview = { author: "", rating: 5, text: "" };
       return;
     }
@@ -44,7 +85,7 @@
         (tempTotal / reviewsData.totalReviews).toFixed(1)
       );
 
-      showForm = false;
+      closeForm();
       newReview = { author: "", rating: 5, text: "" };
     }
     submitting = false;
@@ -70,15 +111,33 @@
           </div>
         {/if}
       </div>
-      <button class="btn btn-primary" onclick={() => (showForm = !showForm)} aria-expanded={showForm}>
-        {showForm ? "Cancel" : "Write a Review"}
-      </button>
+      <a class="btn btn-primary" href={FORM_HASH} onclick={openForm} aria-haspopup="dialog">
+        Write a Review
+      </a>
     </div>
 
-    <!-- Submission Form -->
-    {#if showForm}
-      <div class="review-form-container glass-panel" use:reveal={{ from: "scale" }}>
-        <h3>Rate your experience with bettaHVAC</h3>
+    <!-- Submission Dialog -->
+    <dialog
+      class="review-dialog"
+      bind:this={dialogElement}
+      onclose={handleDialogClose}
+      onclick={(e) => {
+        // Close when clicking the backdrop (the dialog element itself)
+        if (e.target === dialogElement) closeForm();
+      }}
+      aria-labelledby="review-dialog-title"
+    >
+      <div class="review-form-container glass-panel">
+        <button
+          type="button"
+          class="dialog-close"
+          onclick={closeForm}
+          aria-label="Close review form"
+        >
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+
+        <h3 id="review-dialog-title">Rate your experience with bettaHVAC</h3>
         <form onsubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
           <!-- Honeypot Field (Hidden from real users via CSS) -->
           <div class="oh-no-bots" aria-hidden="true">
@@ -103,15 +162,26 @@
             />
           </div>
           <div class="form-group">
-            <label for="rating">Rating (1-5)</label>
-            <input
-              id="rating"
-              type="number"
-              min="1"
-              max="5"
-              bind:value={newReview.rating}
-              required
-            />
+            <span class="form-label" id="rating-label">Rating</span>
+            <div class="star-picker" role="radiogroup" aria-labelledby="rating-label">
+              {#each [1, 2, 3, 4, 5] as star (star)}
+                <button
+                  type="button"
+                  class="star-btn"
+                  class:filled={star <= (hoverRating || newReview.rating)}
+                  role="radio"
+                  aria-checked={newReview.rating === star}
+                  aria-label="{star} {star === 1 ? 'star' : 'stars'}"
+                  onmouseenter={() => (hoverRating = star)}
+                  onmouseleave={() => (hoverRating = 0)}
+                  onfocus={() => (hoverRating = star)}
+                  onblur={() => (hoverRating = 0)}
+                  onclick={() => (newReview.rating = star)}
+                >
+                  ★
+                </button>
+              {/each}
+            </div>
           </div>
           <div class="form-group">
             <label for="text">Review Content</label>
@@ -128,7 +198,7 @@
           </button>
         </form>
       </div>
-    {/if}
+    </dialog>
 
     <!-- Reviews Grid -->
     {#if loading}
@@ -193,14 +263,113 @@
     margin-left: 0.5rem;
   }
 
+  /* Dialog */
+  .review-dialog {
+    border: none;
+    padding: 0;
+    background: transparent;
+    width: min(560px, calc(100vw - 2rem));
+    max-height: calc(100vh - 4rem);
+    margin: auto;
+  }
+
+  .review-dialog::backdrop {
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(4px);
+  }
+
+  .review-dialog[open] .review-form-container {
+    animation: dialogIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @keyframes dialogIn {
+    from {
+      opacity: 0;
+      transform: translateY(24px) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .review-dialog[open] .review-form-container {
+      animation: none;
+    }
+  }
+
   /* Form */
   .review-form-container {
+    position: relative;
     padding: 2rem;
-    margin-bottom: 3rem;
+    background: var(--color-bg);
+    border-radius: var(--radius-lg);
   }
 
   .review-form-container h3 {
     margin-bottom: 1.5rem;
+    padding-right: 2rem;
+  }
+
+  .dialog-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.4rem;
+    line-height: 1;
+    padding: 0.35rem;
+    color: var(--color-text-light);
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  .dialog-close:hover {
+    color: var(--color-text);
+    transform: scale(1.1);
+  }
+
+  .dialog-close:focus-visible {
+    outline: 2px solid var(--color-primary);
+    border-radius: 4px;
+  }
+
+  /* Star picker */
+  .form-label {
+    font-weight: 500;
+  }
+
+  .star-picker {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .star-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 2rem;
+    line-height: 1;
+    padding: 0.1rem;
+    color: var(--color-text-light);
+    opacity: 0.45;
+    transition: color 0.15s ease, opacity 0.15s ease, transform 0.15s ease;
+  }
+
+  .star-btn.filled {
+    color: #fbbc04;
+    opacity: 1;
+  }
+
+  .star-btn:hover {
+    transform: scale(1.15);
+  }
+
+  .star-btn:focus-visible {
+    outline: 2px solid var(--color-primary);
+    border-radius: 4px;
   }
 
   .form-group {
