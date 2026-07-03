@@ -1,27 +1,18 @@
 <script>
-  import { onMount } from "svelte";
-
-  const rawPhone = "(555) 123-4567";
-  const rawEmail = "fake@bettahvac.com";
-
-  let phoneStr = "";
-  let emailStr = "";
-
-  let honeypot = "";
-
-  onMount(() => {
-    const reverseString = (str) => str.split("").reverse().join("");
-    phoneStr = reverseString(rawPhone.split("").reverse().join(""));
-    emailStr = reverseString(rawEmail.split("").reverse().join(""));
-  });
-
-  const handleContactSubmit = () => {
-    if (honeypot !== "") {
-      console.warn("Bot detected by honeypot in contact form.");
-      return;
-    }
-    alert("Message Sent!");
-  };
+  const cities = [
+    "Lexington",
+    "Georgetown",
+    "Nicholasville",
+    "Richmond",
+    "Winchester",
+    "Versailles",
+    "Frankfort",
+    "Berea",
+    "Danville",
+    "Lawrenceburg",
+    "Paris",
+    "Midway"
+  ];
 </script>
 
 <section id="contact" class="section section-alt">
@@ -30,31 +21,21 @@
       <img src="/assets/kentucky-map.png" alt="Kentucky state silhouette map showing bettaHVAC service area" class="map-img" width="600" height="400" loading="lazy" />
       <div class="map-caption">
         <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-        <span>Serving Lexington, KY &amp; surrounding areas</span>
+        <span>Proudly serving Central Kentucky</span>
       </div>
     </div>
-    <div class="contact-col glass-panel">
-      <h2 class="contact-title">Contact Us Now</h2>
-      <p class="contact-phone">
-        <a href="tel:{phoneStr}" aria-label="Call bettaHVAC at {phoneStr}">{phoneStr}</a>
-      </p>
-      <p class="contact-subtitle">Get your free quote today. <a href="mailto:{emailStr}" class="email-inline">{emailStr}</a></p>
-      <p class="contact-questions">Still have questions? Our technicians are ready to provide technical support and personalized advice for your home or business.</p>
-      <form class="contact-form" onsubmit={(e) => { e.preventDefault(); handleContactSubmit(); }}>
-        <div class="oh-no-bots" aria-hidden="true">
-          <label for="address-field">Leave this empty</label>
-          <input id="address-field" type="text" bind:value={honeypot} autocomplete="off" tabindex="-1" />
-        </div>
-        <div class="field-group">
-          <label for="contact-name">Your Name</label>
-          <input id="contact-name" type="text" placeholder="John Doe" required />
-        </div>
-        <div class="field-group">
-          <label for="contact-message">How can we help?</label>
-          <textarea id="contact-message" placeholder="Describe your issue or request..." rows="4" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-secondary w-full">Send Message</button>
-      </form>
+
+    <div class="info-col">
+      <h2 class="contact-title">Areas We Serve</h2>
+
+      <ul class="cities" aria-label="Cities we serve">
+        {#each cities as city}
+          <li>
+            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+            {city}, KY
+          </li>
+        {/each}
+      </ul>
     </div>
   </div>
 </section>
@@ -64,108 +45,13 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
-    align-items: start;
-  }
-
-  .contact-col {
-    padding: 3rem;
-    box-shadow: var(--shadow-lg);
-    border-top: 5px solid var(--color-primary);
-  }
-
-  .contact-title {
-    font-size: 2rem;
-    color: var(--color-text);
-    margin-bottom: 0.5rem;
-  }
-
-  .contact-subtitle {
-    color: var(--color-text-light);
-    margin-bottom: 2rem;
-  }
-
-  .contact-phone {
-    font-size: 1.5rem;
-    font-weight: 700;
-    font-family: var(--font-heading);
-    color: var(--color-primary);
-    margin-bottom: 0.25rem;
-  }
-
-  .contact-phone a {
-    color: var(--color-primary);
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-
-  .contact-phone a:hover {
-    color: var(--color-secondary);
-  }
-
-  .contact-questions {
-    font-size: 0.95rem;
-    color: var(--color-text-light);
-    line-height: 1.6;
-    margin-bottom: 2rem;
-    border-left: 3px solid var(--color-accent);
-    padding-left: 1rem;
-  }
-
-  .field-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .field-group label {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--color-text);
-  }
-
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .contact-form input,
-  .contact-form textarea {
-    width: 100%;
-    padding: 0.8rem 1rem;
-    border: 1px solid #ccc;
-    border-radius: var(--radius-sm);
-    font-family: var(--font-body);
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-  }
-
-  .contact-form input:focus,
-  .contact-form textarea:focus {
-    outline: none;
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(15, 59, 140, 0.1);
-  }
-
-  .oh-no-bots {
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 0;
-    width: 0;
-    z-index: -1;
-  }
-
-  .w-full {
-    width: 100%;
+    align-items: center;
   }
 
   .map-col {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    height: 100%;
   }
 
   .map-img {
@@ -173,6 +59,7 @@
     height: 100%;
     object-fit: cover;
     border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-premium);
   }
 
   .map-caption {
@@ -188,10 +75,64 @@
     color: var(--color-secondary);
   }
 
+  .info-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .contact-title {
+    font-size: 2.5rem;
+    margin-bottom: 0.25rem;
+    color: var(--color-primary);
+  }
+
+  .cities {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem 1.5rem;
+  }
+
+  .cities li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    font-weight: 500;
+  }
+
+  .cities li i {
+    color: var(--color-secondary);
+    font-size: 0.75rem;
+    flex-shrink: 0;
+  }
+
   @media (max-width: 900px) {
     .contact-wrapper {
       grid-template-columns: 1fr;
       gap: 2.5rem;
+    }
+
+    .contact-title {
+      text-align: center;
+    }
+
+    .cities {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .cities {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cities li {
+      justify-content: center;
     }
   }
 </style>
