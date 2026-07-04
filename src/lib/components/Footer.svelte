@@ -129,7 +129,8 @@
   }
 
   .brand-accent {
-    color: var(--color-primary);
+    text-transform: uppercase;
+    color: var(--color-accent);
   }
 
   .brand-tagline {

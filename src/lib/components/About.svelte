@@ -137,7 +137,7 @@
       bind:this={aboutColElement}
       use:reveal={{ from: "left" }}
     >
-      <h2 class="section-title">About <span class="brand-light">betta</span>HVAC</h2>
+      <h2 class="section-title">About <span class="brand-light">betta</span><span class="brand-acent">HVAC</span></h2>
       <p class="about-desc">
         With years of experience, bettaHVAC provides top-tier heating, ventilation, and air conditioning services in Lexington, KY. We are dedicated to delivering reliable, efficient, and cost-effective comfort solutions for homes and businesses.
       </p>
@@ -206,6 +206,10 @@
     margin-bottom: 1rem;
     font-size: 2.8rem;
     text-align: left;
+  }
+
+  .brand-acent {
+    color: var(--color-accent);
   }
 
   .brand-light {
