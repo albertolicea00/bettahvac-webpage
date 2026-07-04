@@ -5,6 +5,22 @@
     <link rel="icon" type="image/jpeg" href="/assets/trash/logo_raw.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BettaHVAC | Premium Heating & Cooling Services</title>
+    <!-- Set the theme before first paint: saved choice wins, otherwise
+         follow the device color scheme (dark → hot, light → cold) -->
+    <script>
+      (function () {
+        var saved = null;
+        try {
+          saved = localStorage.getItem("hvac-theme");
+        } catch (e) {}
+        var theme =
+          saved ||
+          (window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "hot"
+            : "cold");
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"

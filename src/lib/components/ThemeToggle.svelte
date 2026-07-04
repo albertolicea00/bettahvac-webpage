@@ -4,9 +4,24 @@
   let theme = $state("hot");
 
   onMount(() => {
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
     const savedTheme = localStorage.getItem("hvac-theme");
-    theme = savedTheme ?? "hot";
+
+    // Saved choice wins; otherwise follow the device color scheme
+    // (index.html applies the same logic before first paint).
+    theme = savedTheme ?? (media.matches ? "hot" : "cold");
     document.documentElement.setAttribute("data-theme", theme);
+
+    // Track device changes live until the user picks a theme manually
+    /** @param {MediaQueryListEvent} event */
+    const followDevice = (event) => {
+      if (localStorage.getItem("hvac-theme")) return;
+      theme = event.matches ? "hot" : "cold";
+      document.documentElement.setAttribute("data-theme", theme);
+    };
+
+    media.addEventListener("change", followDevice);
+    return () => media.removeEventListener("change", followDevice);
   });
 
   const toggleTheme = () => {
