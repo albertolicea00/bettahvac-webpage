@@ -234,6 +234,8 @@
   .chat-faq-section {
     padding-bottom: 0;
     background-color: var(--color-bg-alt);
+    background-image: var(--doodle-pattern);
+    background-size: 440px auto;
   }
 
   .chat-header {

@@ -59,6 +59,9 @@
   
   --color-glass-bg: rgba(15, 10, 8, 0.85);
   --color-glass-border: rgba(255, 94, 0, 0.25);
+
+  /* WhatsApp-style HVAC doodle tile for alt sections */
+  --doodle-pattern: url("/assets/pattern-hot.svg");
   
   --shadow-premium:
     0 20px 25px -5px rgba(255, 30, 0, 0.3),
@@ -83,6 +86,9 @@
   
   --color-glass-bg: rgba(240, 249, 255, 0.85);
   --color-glass-border: rgba(14, 165, 233, 0.3);
+
+  /* WhatsApp-style HVAC doodle tile for alt sections */
+  --doodle-pattern: url("/assets/pattern-cold.svg");
   
   --shadow-premium:
     0 20px 25px -5px rgba(14, 165, 233, 0.15),
@@ -289,6 +295,8 @@ a:hover {
 }
 .section-alt {
   background-color: var(--color-bg-alt);
+  background-image: var(--doodle-pattern);
+  background-size: 440px auto;
 }
 
 /* Custom Animations & Polish */
