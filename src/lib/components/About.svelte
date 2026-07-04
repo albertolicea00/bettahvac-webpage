@@ -208,10 +208,6 @@
     text-align: left;
   }
 
-  .brand-acent {
-    color: var(--color-accent);
-  }
-
   .brand-light {
     color: var(--color-text);
   }
