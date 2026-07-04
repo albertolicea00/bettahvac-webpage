@@ -151,19 +151,17 @@
             />
           </div>
 
-          <div class="form-group">
-            <label for="author">Name</label>
-            <input
-              id="author"
-              type="text"
-              bind:value={newReview.author}
-              required
-              placeholder="John Doe"
-            />
-          </div>
-          <div class="form-group">
+          <div class="form-group rating-group">
             <span class="form-label" id="rating-label">Rating</span>
-            <div class="star-picker" role="radiogroup" aria-labelledby="rating-label">
+            <p class="rating-hint" id="rating-hint">
+              Choose how many stars our service deserves
+            </p>
+            <div
+              class="star-picker"
+              role="radiogroup"
+              aria-labelledby="rating-label"
+              aria-describedby="rating-hint"
+            >
               {#each [1, 2, 3, 4, 5] as star (star)}
                 <button
                   type="button"
@@ -183,15 +181,25 @@
               {/each}
             </div>
           </div>
-          <div class="form-group">
-            <label for="text">Review Content</label>
+          <div class="form-group float-field">
+            <input
+              id="author"
+              type="text"
+              bind:value={newReview.author}
+              required
+              placeholder=" "
+            />
+            <label for="author">Name</label>
+          </div>
+          <div class="form-group float-field">
             <textarea
               id="text"
               bind:value={newReview.text}
               required
               rows="3"
-              placeholder="Share details of your own experience at this place"
+              placeholder=" "
             ></textarea>
+            <label for="text">Review Content</label>
           </div>
           <button type="submit" class="btn btn-secondary" disabled={submitting}>
             {submitting ? "Posting..." : "Post"}
@@ -294,18 +302,20 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .review-dialog[open] .review-form-container {
+    .review-dialog[open] .review-form-container,
+    .review-dialog[open] .star-picker {
       animation: none;
     }
   }
 
-  /* Form */
+  /* Form — liquid glass: intensify the shared .glass-panel look */
   .review-form-container {
     position: relative;
     padding: 2rem;
-    background: var(--color-bg);
     color: var(--color-text);
-    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--color-bg) 65%, transparent);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
   }
 
   /* Honeypot: pulled off-screen instead of display:none so naive bots
@@ -355,6 +365,25 @@
   .star-picker {
     display: flex;
     gap: 0.25rem;
+    transform-origin: left center;
+  }
+
+  /* Blink for ~3s on open so the user notices where to rate */
+  .review-dialog[open] .star-picker {
+    animation: starHint 1s ease-in-out 3;
+    animation-delay: 0.4s;
+  }
+
+  @keyframes starHint {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.08);
+      opacity: 0.45;
+    }
   }
 
   .star-btn {
@@ -370,7 +399,7 @@
   }
 
   .star-btn.filled {
-    color: #fbbc04;
+    color: var(--color-primary);
     opacity: 1;
   }
 
@@ -397,23 +426,64 @@
   .form-group input,
   .form-group textarea {
     padding: 0.75rem;
-    background: var(--color-bg-alt);
+    background: color-mix(in srgb, var(--color-bg-alt) 50%, transparent);
     color: var(--color-text);
-    border: 1px solid rgba(128, 128, 128, 0.4);
+    border: 1px solid var(--color-glass-border);
     border-radius: var(--radius-sm);
     font-family: var(--font-body);
   }
 
-  .form-group input::placeholder,
-  .form-group textarea::placeholder {
-    color: var(--color-text-light);
-    opacity: 0.7;
+  .form-group textarea {
+    resize: none;
+    min-height: 6rem;
   }
 
   .form-group input:focus,
   .form-group textarea:focus {
     outline: none;
     border-color: var(--color-primary);
+  }
+
+  /* Floating labels: the label sits inside the field and floats up
+     once the field is focused or filled */
+  .float-field {
+    position: relative;
+    gap: 0;
+  }
+
+  .float-field input,
+  .float-field textarea {
+    padding: 1.35rem 0.9rem 0.6rem;
+  }
+
+  .float-field label {
+    position: absolute;
+    left: 0.95rem;
+    top: 1rem;
+    font-weight: 500;
+    color: var(--color-text-light);
+    pointer-events: none;
+    transform-origin: left top;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  .float-field input:focus + label,
+  .float-field input:not(:placeholder-shown) + label,
+  .float-field textarea:focus + label,
+  .float-field textarea:not(:placeholder-shown) + label {
+    transform: translateY(-0.6rem) scale(0.74);
+    color: var(--color-primary);
+  }
+
+  /* Rating */
+  .rating-group {
+    gap: 0.15rem;
+  }
+
+  .rating-hint {
+    margin: 0 0 0.35rem;
+    font-size: 0.9rem;
+    color: var(--color-text-light);
   }
 
   /* Grid */
