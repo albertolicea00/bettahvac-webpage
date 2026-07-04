@@ -74,7 +74,7 @@
 <section id="services" class="section section-alt">
   <div class="container">
     <div class="section-header" use:reveal>
-      <h2 class="section-title">Services</h2>
+      <h2 class="section-title">What We Deliver to Our Clients</h2>
       <p class="section-subtitle">
         Heating, cooling, and maintenance solutions tailored to your home or
         business... done right the first time.
@@ -105,6 +105,10 @@
 </section>
 
 <style>
+  .section-alt {
+    background: var(--color-bg); 
+  }
+  
   .section-header {
     margin-bottom: 3rem;
     text-align: center;
@@ -129,7 +133,7 @@
 
   /* Liquid glass base card — the tilt only affects the sprite, not the card */
   .service-card {
-    background: var(--color-bg);
+    background: var(--color-bg-alt);
     border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-lg);
     padding: 2.5rem 2rem;

@@ -35,9 +35,9 @@
 
 <style>
   .cta-banner {
-    background-color: var(--color-bg-alt);
+    background-color: var(--color-bg);
     text-align: center;
-    padding: 5rem 2rem;
+    padding: 2rem 2rem 5rem 2rem;
     width: 100%;
     color: var(--color-text);
   }
@@ -107,7 +107,7 @@
   }
 
   .cta-secondary {
-    background-color: var(--color-bg);
+    background-color: var(--color-bg)-alt;
     color: var(--color-primary);
     border: 2px solid var(--color-primary);
   }

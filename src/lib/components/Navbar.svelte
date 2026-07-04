@@ -6,8 +6,8 @@
   let mobileOpen = $state(false);
 
   const navLinks = [
-    { label: "Reviews", href: "#reviews" },
     { label: "About Us", href: "#about" },
+    { label: "Reviews", href: "#reviews" },
     { label: "Services", href: "#services" },
     { label: "FAQ", href: "#faq" },
     { label: "Contact", href: "#contact" },

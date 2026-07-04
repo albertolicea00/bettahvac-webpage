@@ -116,8 +116,8 @@
 <main id="main-content">
   <FixedSocials />
   <Hero />
-  <Reviews />
   <About />
+  <Reviews />
   <Services />
   <FAQ />
   <Contact />

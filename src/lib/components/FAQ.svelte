@@ -233,6 +233,7 @@
 <style>
   .chat-faq-section {
     padding-bottom: 0;
+    background-color: var(--color-bg-alt);
   }
 
   .chat-header {
@@ -283,7 +284,7 @@
   }
 
   .customer-avatar {
-    background: var(--color-bg-alt);
+    background: var(--color-bg);
     color: var(--color-text-light);
     border: 2px solid #e2e8f0;
   }
