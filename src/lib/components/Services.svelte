@@ -136,6 +136,7 @@
     background: var(--color-bg-alt);
     border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-lg);
+    border-color: color-mix(in srgb, var(--color-primary) 20%, transparent);
     padding: 2.5rem 2rem;
     box-shadow:
       0 8px 32px rgba(0, 0, 0, 0.12),
@@ -176,7 +177,7 @@
     filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.28));
     will-change: transform;
     user-select: none;
-    transform: scale(2.8);
+    transform: scale(2.3);
     -webkit-user-drag: none;
   }
 
