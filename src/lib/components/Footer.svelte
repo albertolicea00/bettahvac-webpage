@@ -68,6 +68,10 @@
             <i class="fa-brands fa-instagram" aria-hidden="true"></i>
             <span>Instagram</span>
           </a>
+          <a href="https://g.page/bettahvac" target="_blank" rel="noopener noreferrer" class="social-btn google" aria-label="Find bettaHVAC on Google Business">
+            <i class="fa-brands fa-google" aria-hidden="true"></i>
+            <span>Google Business</span>
+          </a>
         </div>
       </div>
     </div>
@@ -246,6 +250,13 @@
     background: #1877f2;
     color: white;
     border-color: #1877f2;
+    transform: translateX(4px);
+  }
+
+  .social-btn.google:hover {
+    background: #4285f4;
+    color: white;
+    border-color: #4285f4;
     transform: translateX(4px);
   }
 
