@@ -126,6 +126,7 @@
         if (e.target === dialogElement) closeForm();
       }}
       aria-labelledby="review-dialog-title"
+      aria-describedby="review-dialog-subtitle"
     >
       <div class="review-form-container glass-panel">
         <button
@@ -138,6 +139,9 @@
         </button>
 
         <h3 id="review-dialog-title">Rate your experience with bettaHVAC</h3>
+        <p class="dialog-subtitle" id="review-dialog-subtitle">
+          Your feedback helps your neighbors choose with confidence.
+        </p>
         <form onsubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
           <!-- Honeypot Field (Hidden from real users via CSS) -->
           <div class="oh-no-bots" aria-hidden="true">
@@ -201,8 +205,8 @@
             ></textarea>
             <label for="text">Review Content</label>
           </div>
-          <button type="submit" class="btn btn-secondary" disabled={submitting}>
-            {submitting ? "Posting..." : "Post"}
+          <button type="submit" class="btn btn-primary" disabled={submitting}>
+            {submitting ? "Submitting..." : "Submit your review"}
           </button>
         </form>
       </div>
@@ -303,7 +307,7 @@
 
   @media (prefers-reduced-motion: reduce) {
     .review-dialog[open] .review-form-container,
-    .review-dialog[open] .star-picker {
+    .review-dialog[open] .star-btn {
       animation: none;
     }
   }
@@ -329,8 +333,14 @@
   }
 
   .review-form-container h3 {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.4rem;
     padding-right: 2rem;
+  }
+
+  .dialog-subtitle {
+    margin: 0 0 1.5rem;
+    font-size: 0.95rem;
+    color: var(--color-text-light);
   }
 
   .dialog-close {
@@ -365,24 +375,35 @@
   .star-picker {
     display: flex;
     gap: 0.25rem;
-    transform-origin: left center;
   }
 
-  /* Blink for ~3s on open so the user notices where to rate */
-  .review-dialog[open] .star-picker {
+  /* Twinkle for ~3s on open so the user notices where to rate.
+     Opacity only — no transform, so nothing overflows the dialog. */
+  .review-dialog[open] .star-btn {
     animation: starHint 1s ease-in-out 3;
-    animation-delay: 0.4s;
+    animation-delay: calc(0.4s + var(--twinkle, 0s));
+  }
+
+  .review-dialog[open] .star-btn:nth-child(2) {
+    --twinkle: 0.12s;
+  }
+  .review-dialog[open] .star-btn:nth-child(3) {
+    --twinkle: 0.24s;
+  }
+  .review-dialog[open] .star-btn:nth-child(4) {
+    --twinkle: 0.36s;
+  }
+  .review-dialog[open] .star-btn:nth-child(5) {
+    --twinkle: 0.48s;
   }
 
   @keyframes starHint {
     0%,
     100% {
-      transform: scale(1);
       opacity: 1;
     }
     50% {
-      transform: scale(1.08);
-      opacity: 0.45;
+      opacity: 0.3;
     }
   }
 
