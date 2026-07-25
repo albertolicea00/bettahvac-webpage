@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bettahvac.com/sitemap.xml
+Sitemap: https://www.bettahvac.com/sitemap.xml
