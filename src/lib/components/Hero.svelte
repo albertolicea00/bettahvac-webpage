@@ -149,7 +149,7 @@
     line-height: 0.95;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: -2px;
+    letter-spacing: -2.4x;
     margin-bottom: 1.5rem;
   }
 
