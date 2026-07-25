@@ -76,7 +76,7 @@
           <span class="sub-line typing-line">
             {typedText}<span class="typing-caret" aria-hidden="true">|</span>
           </span>
-          <span class="sub-line">in Lexington, KY and surrounding areas</span>
+          <span class="sub-line">in Luisville, KY and surrounding areas</span>
         </h2>
       </div>
 

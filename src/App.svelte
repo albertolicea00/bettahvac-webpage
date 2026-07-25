@@ -13,22 +13,22 @@
 </script>
 
 <svelte:head>
-  <title>bettaHVAC | Professional HVAC Services in Lexington, KY</title>
-  <meta name="description" content="bettaHVAC provides expert heating, ventilation, and air conditioning services in Lexington, KY. Licensed professionals, 24/7 emergency service, and free quotes. Call us today!" />
+  <title>bettaHVAC | Professional HVAC Services in Luisville, KY</title>
+  <meta name="description" content="bettaHVAC provides expert heating, ventilation, and air conditioning services in Luisville, KY. Licensed professionals, 24/7 emergency service, and free quotes. Call us today!" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://bettahvac.com/" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="bettaHVAC | Professional HVAC Services in Lexington, KY" />
+  <meta property="og:title" content="bettaHVAC | Professional HVAC Services in Luisville, KY" />
   <meta property="og:description" content="Expert heating, ventilation, and air conditioning services. Licensed professionals, 24/7 emergency service, free quotes." />
   <meta property="og:url" content="https://bettahvac.com/" />
   <meta property="og:site_name" content="bettaHVAC" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="bettaHVAC | Professional HVAC Services in Lexington, KY" />
-  <meta name="twitter:description" content="Expert heating, ventilation, and air conditioning services in Lexington, KY." />
+  <meta name="twitter:title" content="bettaHVAC | Professional HVAC Services in Luisville, KY" />
+  <meta name="twitter:description" content="Expert heating, ventilation, and air conditioning services in Luisville, KY." />
 
   <!-- LocalBusiness Structured Data -->
   {@html `<script type="application/ld+json">
@@ -36,11 +36,11 @@
     "@context": "https://schema.org",
     "@type": "HVACBusiness",
     "name": "bettaHVAC",
-    "description": "Professional heating, ventilation, and air conditioning services in Lexington, KY and surrounding areas.",
+    "description": "Professional heating, ventilation, and air conditioning services in Luisville, KY and surrounding areas.",
     "url": "https://bettahvac.com",
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Lexington",
+      "addressLocality": "Luisville",
       "addressRegion": "KY",
       "addressCountry": "US"
     },
@@ -82,7 +82,7 @@
         "name": "Do you offer 24/7 emergency service?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, our team is available 24 hours a day, 7 days a week to handle any emergency in Lexington and surrounding areas."
+          "text": "Yes, our team is available 24 hours a day, 7 days a week to handle any emergency in Luisville and surrounding areas."
         }
       },
       {

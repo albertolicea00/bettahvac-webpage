@@ -9,7 +9,7 @@
     },
     {
       question: "Do you offer 24/7 emergency service?",
-      answer: "Yes, our team is available 24 hours a day, 7 days a week to handle any emergency in Lexington and surrounding areas."
+      answer: "Yes, our team is available 24 hours a day, 7 days a week to handle any emergency in Luisville and surrounding areas."
     },
     {
       question: "How long does it take to install a new air conditioning system?",

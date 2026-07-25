@@ -29,7 +29,7 @@
           <span class="brand-white">betta</span><span class="brand-accent">HVAC</span>
         </div>
         <p class="brand-tagline">
-          Professional Heating & Cooling Services in Lexington, KY and surrounding areas.
+          Professional Heating & Cooling Services in Luisville, KY and surrounding areas.
         </p>
         <div class="contact-info">
           <!--sse-->
