@@ -1,13 +1,7 @@
 <script>
-  import { onMount } from "svelte";
+  import { SOCIALS as socials } from "../socials.js";
 
   export let visible = true;
-
-  const socials = [
-    { platform: "facebook", url: "https://facebook.com/bettahvac", icon: "fa-brands fa-facebook-f", label: "Follow bettaHVAC on Facebook" },
-    { platform: "instagram", url: "https://instagram.com/bettahvac", icon: "fa-brands fa-instagram", label: "Follow bettaHVAC on Instagram" },
-    { platform: "tiktok", url: "https://www.tiktok.com/@bettahvac", icon: "fa-brands fa-tiktok", label: "Follow bettaHVAC on TikTok" }
-  ];
 </script>
 
 {#if visible}

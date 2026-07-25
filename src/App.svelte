@@ -9,6 +9,7 @@
   import Contact from "./lib/components/Contact.svelte";
   import FixedSocials from "./lib/components/FixedSocials.svelte";
   import Footer from "./lib/components/Footer.svelte";
+  import { getSameAs } from "./lib/socials.js";
 </script>
 
 <svelte:head>
@@ -37,7 +38,6 @@
     "name": "bettaHVAC",
     "description": "Professional heating, ventilation, and air conditioning services in Lexington, KY and surrounding areas.",
     "url": "https://bettahvac.com",
-    "telephone": "(555) 123-4567",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Lexington",
@@ -59,11 +59,7 @@
       "opens": "00:00",
       "closes": "23:59"
     },
-    "sameAs": [
-      "https://facebook.com/bettahvac",
-      "https://instagram.com/bettahvac",
-      "https://www.tiktok.com/@bettahvac"
-    ]
+    "sameAs": ${JSON.stringify(getSameAs())}
   }
   <\/script>`}
 

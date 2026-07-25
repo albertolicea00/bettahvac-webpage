@@ -6,6 +6,7 @@
     getPhoneDisplay,
     getPhoneHref,
   } from "../contact.js";
+  import { SOCIALS, GOOGLE_BUSINESS } from "../socials.js";
 
   const phone = getPhoneDisplay();
   const email = getEmail();
@@ -39,9 +40,9 @@
             <i class="fa-solid fa-envelope" aria-hidden="true"></i>
             {email}
           </a>
-          <a href="https://g.page/bettahvac" target="_blank" rel="noopener noreferrer" class="contact-item" aria-label="Find bettaHVAC on Google Business">
-            <i class="fa-brands fa-google" aria-hidden="true"></i>
-            Catch us on Google
+          <a href={GOOGLE_BUSINESS.url} target="_blank" rel="noopener noreferrer" class="contact-item" aria-label={GOOGLE_BUSINESS.label}>
+            <i class={GOOGLE_BUSINESS.icon} aria-hidden="true"></i>
+            {GOOGLE_BUSINESS.text}
           </a>
         </div>
       </div>
@@ -64,18 +65,12 @@
       <div class="footer-col" use:reveal={{ delay: 240 }}>
         <h3 class="col-title">Follow Us</h3>
         <div class="social-links">
-          <a href="https://facebook.com/bettahvac" target="_blank" rel="noopener noreferrer" class="social-btn facebook" aria-label="Follow bettaHVAC on Facebook">
-            <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
-            <span>Facebook</span>
-          </a>
-          <a href="https://instagram.com/bettahvac" target="_blank" rel="noopener noreferrer" class="social-btn instagram" aria-label="Follow bettaHVAC on Instagram">
-            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
-            <span>Instagram</span>
-          </a>
-          <a href="https://www.tiktok.com/@bettahvac" target="_blank" rel="noopener noreferrer" class="social-btn tiktok" aria-label="Follow bettaHVAC on TikTok">
-            <i class="fa-brands fa-tiktok" aria-hidden="true"></i>
-            <span>TikTok</span>
-          </a>
+          {#each SOCIALS as sm (sm.platform)}
+            <a href={sm.url} target="_blank" rel="noopener noreferrer" class="social-btn {sm.platform}" aria-label={sm.label}>
+              <i class={sm.icon} aria-hidden="true"></i>
+              <span>{sm.name}</span>
+            </a>
+          {/each}
         </div>
       </div>
     </div>
