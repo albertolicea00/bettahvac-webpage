@@ -104,7 +104,9 @@
 <style>
   .hero-section {
     position: relative;
-    height: 100vh;
+    min-height: 100vh;
+    /* dvh keeps the hero clear of mobile browser chrome */
+    min-height: 100dvh;
     width: 100%;
     display: flex;
     align-items: center;
@@ -125,7 +127,8 @@
   .hero-container {
     position: relative;
     z-index: 2;
-    height: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -140,17 +143,23 @@
     flex-direction: column;
     align-items: center;
     gap: 2.5rem;
+    /* width:100% stops the oversized title from widening this
+       shrink-to-fit box and pushing the centered text off-screen */
+    width: 100%;
     max-width: 1000px;
     margin: 0 auto;
   }
 
   .main-title {
-    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-size: clamp(2.3rem, 11vw, 8rem);
     line-height: 0.95;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: -2.4x;
+    letter-spacing: -0.03em;
     margin-bottom: 1.5rem;
+    max-width: 100%;
+    /* last-resort break instead of horizontal overflow */
+    overflow-wrap: break-word;
   }
 
   .brand-white {
@@ -174,6 +183,7 @@
     margin-right: auto;
     line-height: 1.5;
     letter-spacing: 0.5px;
+    max-width: min(820px, 100%);
   }
 
   .hero-subheadline .sub-line:nth-child(2) {
@@ -276,7 +286,7 @@
   .scroll-line::after {
     content: "";
     position: absolute;
-    top: -60px;
+    top: -100%;
     left: 0;
     width: 100%;
     height: 100%;
@@ -284,12 +294,13 @@
     animation: scroll-line-move 2s infinite;
   }
 
+  /* Percentages keep the sweep in sync when .scroll-line shrinks on mobile */
   @keyframes scroll-line-move {
     0% {
-      top: -60px;
+      top: -100%;
     }
     100% {
-      top: 60px;
+      top: 100%;
     }
   }
 
@@ -325,12 +336,8 @@
   }
 
   @media (max-width: 768px) {
-    .main-title {
-      font-size: 4.5rem;
-    }
     .hero-subheadline {
       font-size: 1.2rem;
-      padding: 0 1rem;
     }
     .hero-subheadline .sub-line:nth-child(2) {
       font-size: 0.9rem;
@@ -342,6 +349,66 @@
     .btn-premium {
       width: 100%;
       justify-content: center;
+    }
+  }
+
+  /* Small phones (~430px and down) */
+  @media (max-width: 480px) {
+    .hero-container {
+      padding: 2.5rem 1rem 6rem;
+    }
+    .hero-main {
+      gap: 1.75rem;
+    }
+    .main-title {
+      margin-bottom: 1rem;
+    }
+    .hero-subheadline {
+      font-size: 1.05rem;
+      margin-top: 0.75rem;
+    }
+    /* "Air Conditioning" wraps to a 2nd line — reserve the space so the
+       typing loop doesn't shift the layout on every word change */
+    .typing-line {
+      min-height: 3em;
+    }
+    .btn-premium {
+      padding: 1rem 1.5rem;
+    }
+    .scroll-explorer {
+      bottom: 1.25rem;
+      gap: 0.6rem;
+    }
+    .scroll-line {
+      height: 40px;
+    }
+    .scroll-label {
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+    }
+  }
+
+  /* Very small phones (~360px and down) */
+  @media (max-width: 360px) {
+    .main-title {
+      font-size: 2.4rem;
+      letter-spacing: -0.02em;
+    }
+    .hero-subheadline {
+      font-size: 0.95rem;
+    }
+    .hero-subheadline .sub-line:nth-child(2) {
+      font-size: 0.8rem;
+    }
+  }
+
+  /* Short viewports (landscape phones) — drop the scroll cue */
+  @media (max-height: 520px) {
+    .scroll-explorer {
+      display: none;
+    }
+    .hero-container {
+      padding-bottom: 2rem;
     }
   }
 </style>
