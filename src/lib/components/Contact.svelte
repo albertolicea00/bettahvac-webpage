@@ -15,6 +15,7 @@
       advice for your home or business.
     </p>
     <div class="cta-buttons">
+      <!--sse-->
       <a href={getPhoneHref()} class="cta-btn cta-primary">
         <i class="fa-solid fa-phone"></i> Call Us Now
       </a>
@@ -29,6 +30,7 @@
       <a href={getEmailHref()} class="cta-btn cta-secondary">
         <i class="fa-solid fa-envelope"></i> Email Us
       </a>
+      <!--/sse-->
     </div>
   </div>
 </section>

@@ -32,6 +32,7 @@
           Professional Heating & Cooling Services in Lexington, KY and surrounding areas.
         </p>
         <div class="contact-info">
+          <!--sse-->
           <a href={getPhoneHref()} class="contact-item">
             <i class="fa-solid fa-phone" aria-hidden="true"></i>
             {phone}
@@ -40,6 +41,7 @@
             <i class="fa-solid fa-envelope" aria-hidden="true"></i>
             {email}
           </a>
+          <!--/sse-->
           <a href={GOOGLE_BUSINESS.url} target="_blank" rel="noopener noreferrer" class="contact-item" aria-label={GOOGLE_BUSINESS.label}>
             <i class={GOOGLE_BUSINESS.icon} aria-hidden="true"></i>
             {GOOGLE_BUSINESS.text}

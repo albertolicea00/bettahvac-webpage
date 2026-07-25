@@ -23,10 +23,18 @@
  * Cloudflare adds a second layer in front of all this (dashboard settings,
  * not tracked in this repo):
  *   - Email Address Obfuscation — rewrites addresses found in the HTML
- *     response. It does not touch values inside the JS bundle, so it does
- *     not replace what this module does; the two are complementary.
+ *     response. This is a client-rendered SPA, so the address is never in
+ *     the HTML Cloudflare sees; it is this module, not Cloudflare, that
+ *     protects the email.
  *   - Server-Side Excludes (SSE) — strips content wrapped in
- *     <!--sse-->…<!--/sse--> for visitors Cloudflare scores as bots.
+ *     <!--sse-->...<!--/sse--> for visitors Cloudflare scores as bots.
+ *     Do not bother wrapping the phone or WhatsApp markup in those tags:
+ *     SSE only rewrites HTML responses, and (a) Svelte injects the contact
+ *     markup client-side so it is absent from the served HTML, and (b) the
+ *     compiler strips template comments anyway. It would be dead code twice
+ *     over. Making SSE apply would mean prerendering the number into the
+ *     HTML, which is strictly worse: plaintext for every visitor Cloudflare
+ *     does not flag as a bot.
  *   - Bot Fight Mode — challenges known bad bots before they hit origin.
  *   - Hotlink Protection — blocks other sites from embedding our images.
  *     Heads up: it filters image requests by referer, so if a social crawler
