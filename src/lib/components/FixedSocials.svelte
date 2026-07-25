@@ -54,7 +54,6 @@
     transition: all 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-right: none;
-    border-radius: 8px 0 0 8px;
   }
 
   .social-side-btn:first-child {
