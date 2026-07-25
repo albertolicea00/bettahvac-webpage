@@ -16,6 +16,7 @@ This repository hosts the **BettaHVAC** landing page—a high-performance, visua
 - 🔥 **Climate-Responsive UI**: Integrated animations that shift based on the selected mode (Cold/Hot).
 - ⭐ **Trusted Reviews**: Modular integration system for Google Reviews and internal feedback synchronization.
 - 📱 **Mobile First**: Fully responsive design that looks incredible on every device.
+- 🕵️ **Scraper-Resistant Contact Data**: Phone, email, and WhatsApp are never stored in plain text — encoded at rest, decoded at runtime, and hardened at the edge by Cloudflare.
 
 ## 📄 License
 
