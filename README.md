@@ -2,8 +2,9 @@
 
 [![Framework](https://img.shields.io/badge/Svelte-5-FF3E00?logo=svelte&logoColor=white)](https://svelte.dev/)
 [![Build Tool](https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Style](https://img.shields.io/badge/Style-Vanilla_CSS-1572B6?logo=css3&logoColor=white)](#)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![Trademark](https://img.shields.io/badge/Trademark-Proprietary-8B0000.svg?logo=trademark&logoColor=white)](TRADEMARKS.md)
 
 > **The ultimate digital experience for modern HVAC services.**
 
@@ -17,6 +18,11 @@ This repository hosts the **BettaHVAC** landing page—a high-performance, visua
 - ⭐ **Trusted Reviews**: Modular integration system for Google Reviews and internal feedback synchronization.
 - 📱 **Mobile First**: Fully responsive design that looks incredible on every device.
 - 🕵️ **Scraper-Resistant Contact Data**: Phone, email, and WhatsApp are never stored in plain text — encoded at rest, decoded at runtime, and hardened at the edge by Cloudflare.
+
+## 📚 Documentation
+
+- [DESIGN.md](DESIGN.md) — design system: climate-responsive theming, color/type tokens, component primitives, motion, accessibility.
+- [AGENTS.md](AGENTS.md) — engineering guide: stack, commands, architecture, conventions, anti-scraping rules, and gotchas.
 
 ## 📄 License
 
