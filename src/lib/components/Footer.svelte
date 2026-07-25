@@ -39,6 +39,10 @@
             <i class="fa-solid fa-envelope" aria-hidden="true"></i>
             {email}
           </a>
+          <a href="https://g.page/bettahvac" target="_blank" rel="noopener noreferrer" class="contact-item" aria-label="Find bettaHVAC on Google Business">
+            <i class="fa-brands fa-google" aria-hidden="true"></i>
+            Catch us on Google
+          </a>
         </div>
       </div>
 
@@ -68,9 +72,9 @@
             <i class="fa-brands fa-instagram" aria-hidden="true"></i>
             <span>Instagram</span>
           </a>
-          <a href="https://g.page/bettahvac" target="_blank" rel="noopener noreferrer" class="social-btn google" aria-label="Find bettaHVAC on Google Business">
-            <i class="fa-brands fa-google" aria-hidden="true"></i>
-            <span>Google Business</span>
+          <a href="https://www.tiktok.com/@bettahvac" target="_blank" rel="noopener noreferrer" class="social-btn tiktok" aria-label="Follow bettaHVAC on TikTok">
+            <i class="fa-brands fa-tiktok" aria-hidden="true"></i>
+            <span>TikTok</span>
           </a>
         </div>
       </div>
@@ -253,10 +257,10 @@
     transform: translateX(4px);
   }
 
-  .social-btn.google:hover {
-    background: #4285f4;
+  .social-btn.tiktok:hover {
+    background: #000;
     color: white;
-    border-color: #4285f4;
+    border-color: rgba(255, 255, 255, 0.4);
     transform: translateX(4px);
   }
 

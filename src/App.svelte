@@ -61,7 +61,8 @@
     },
     "sameAs": [
       "https://facebook.com/bettahvac",
-      "https://instagram.com/bettahvac"
+      "https://instagram.com/bettahvac",
+      "https://www.tiktok.com/@bettahvac"
     ]
   }
   <\/script>`}
