@@ -20,9 +20,8 @@ Operating manual for anyone (human or AI) working in this repo. Pair this with `
 npm run dev       # Vite dev server
 npm run build     # production build → dist/
 npm run preview   # serve the built dist/
+npm run check     # svelte-check type check (uses jsconfig.json, checkJs)
 ```
-
-`svelte-check` is available (devDependency) for type checking, though there's no npm script wired for it.
 
 ## Layout
 
