@@ -144,5 +144,10 @@
         </g>
     </g>
 <text x="600" y="470" text-anchor="middle" font-family="Avenir Next Condensed" font-weight="900" font-size="96" letter-spacing="2"><tspan fill="#46C9F5">BETTA</tspan><tspan fill="#111111">HVAC</tspan></text>
-<text x="600" y="548" text-anchor="middle" font-family="Avenir Next Condensed" font-weight="900" font-size="46" letter-spacing="3" fill="#111111">(502) 701-5545</text>
+<!--
+  Phone sits one step below the wordmark: Avenir Next (non-condensed) at demi
+  bold reads as a supporting line instead of a second headline, and pairs with
+  the condensed lockup above without repeating it.
+-->
+<text x="600" y="545" text-anchor="middle" font-family="Avenir Next" font-weight="600" font-size="42" letter-spacing="4" fill="#334155">(502) 701-5545</text>
 </svg>
