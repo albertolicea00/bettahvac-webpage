@@ -32,6 +32,7 @@ src/
   app.css                  # design tokens + global primitives (see DESIGN.md)
   App.svelte               # page composition + <svelte:head> SEO/JSON-LD
   lib/
+    clarity.js             # SINGLE SOURCE for Microsoft Clarity analytics
     contact.js             # SINGLE SOURCE for phone/email/WhatsApp — obfuscated (read §Contact)
     socials.js             # SINGLE SOURCE for social/listing URLs + sameAs
     ReviewService.js       # reviews data layer (mock now, API-ready)
@@ -98,6 +99,10 @@ Art ships as hot/cold pairs in `public/assets/` (see DESIGN.md §7). The Python 
 - `index.html` `<head>` carries the OG image meta and favicons.
 - `public/robots.txt` + `public/sitemap.xml` — bump `<lastmod>` in the sitemap on meaningful content changes.
 - If you edit an FAQ answer in `FAQ.svelte`, update the matching entry in the `FAQPage` JSON-LD so structured data stays truthful.
+
+## Analytics (Microsoft Clarity)
+
+`src/lib/clarity.js` is the single source for behavioral analytics via `@microsoft/clarity`. It initializes automatically in `main.js`. By default it is disabled in local dev (`import.meta.env.DEV`) to prevent test sessions from polluting metrics; set `VITE_CLARITY_DEV=true` in `.env` to enable locally. Override the project ID with `VITE_CLARITY_PROJECT_ID`.
 
 ## Gotchas
 
